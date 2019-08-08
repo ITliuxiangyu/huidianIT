@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .wrap {
+            width: 242px;
+            height: 242px;
+            border-radius: 50%;
+            background-image: -webkit-linear-gradient(top, #d3e8ef 0px, #a3adb0 50px, #767674 100%);
+            position: relative;
+        }
+        
+        #clock {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            margin-left: -110px;
+            margin-top: -110px;
+            top: 50%;
+            left: 50%;
+            box-shadow: inset 0px 5px 10px #a3a9ad;
+        }
+        
+        #bp {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        #bp div {
+            position: absolute;
+            font-size: 20px;
+            top: 100px;
+            left: 5px;
+            width: 210px;
+            height: 22px;
+            text-align: center;
+            line-height: 22px;
+        }
+        
+        #bp span {
+            display: block;
+            width: 22px;
+            height: 22px;
+        }
+        
+        #hour {
+            width: 6px;
+            height: 70px;
+            background: black;
+            bottom: 110px;
+            opacity: 0.6;
+            transform-origin: 50% bottom;
+        }
+        
+        #minute {
+            width: 4px;
+            height: 100px;
+            background: purple;
+            opacity: 0.6;
+            bottom: 110px;
+            transform-origin: 50% bottom;
+        }
+        
+        #second {
+            width: 2px;
+            height: 100px;
+            background: red;
+            opacity: 0.6;
+            bottom: 110px;
+            transform-origin: 50% bottom;
+        }
+        
+        #hour,
+        #second,
+        #minute {
+            position: absolute;
+            left: 110px;
+        }
+        
+        .shot {
+            position: absolute;
+            left: 110px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <div id="clock">
+
+            <div id="bp">
+
+                <div><span>9</span></div>
+                <div><span>10</span></div>
+                <div><span>11</span></div>
+                <div><span>12</span></div>
+                <div><span>1</span></div>
+                <div><span>2</span></div>
+                <div><span>3</span></div>
+                <div><span>4</span></div>
+                <div><span>5</span></div>
+                <div><span>6</span></div>
+                <div><span>7</span></div>
+                <div><span>8</span></div>
+
+            </div>
+
+
+            <div id="hour"></div>
+            <div id="minute"></div>
+            <div id="second"></div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+    var hour = document.getElementById("hour"),
+        minute = document.getElementById("minute"),
+        second = document.getElementById("second"),
+        bp = document.getElementById("bp"),
+        shot = bp.getElementsByTagName("span"),
+        divs = bp.getElementsByTagName("div");
+    for (var i = 0; i < 12; i++) {
+        divs[i].style.transform = "rotate(" + i * 30 + "deg)";
+    }
+    for (var i = 0; i < 12; i++) {
+        shot[i].style.transform = "rotate(" + i * -30 + "deg)";
+    }
+    setInterval(function() {
+        var nowDate = new Date(),
+            nowHour = nowDate.getHours(),
+            nowMin = nowDate.getMinutes(),
+            nowSec = nowDate.getSeconds();
+
+        var minDeg = 6 * nowMin / 360 * 30;
+        hour.style.transform = "rotate(" + (nowHour * 30 + minDeg) + "deg)";
+        var secDeg = 6 * nowSec / 360 * 6;
+        minute.style.transform = "rotate(" + (nowMin * 6 + secDeg) + "deg)";
+        second.style.transform = "rotate(" + (nowSec * 6) + "deg)";
+    }, 500);
+</script>
+
+</html>
