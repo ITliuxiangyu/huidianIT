@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#wrap {
+				width: 800px;
+				border: 1px solid red;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+
+			#wrap ul {
+				width: 200px;
+				/*border: 1px solid blue;*/
+				box-sizing: border-box;
+				float: left;
+			}
+
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			#wrap ul li {
+				list-style: none;
+				background-color: #ccc;
+				font-size: 20px;
+				margin: 0 5px;
+				margin-bottom: 18px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var imgAddressArray = ["http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg",
+			"http://dl.bizhi.sogou.com/images/2013/03/26/334124.jpg", "http://dl.bizhi.sogou.com/images/2012/09/30/44928.jpg",
+			"http://b.hiphotos.baidu.com/zhidao/pic/item/f9dcd100baa1cd119b739dafbb12c8fcc2ce2d7c.jpg",
+			"http://s9.knowsky.com/bizhi/l/20090808/200908312%20(41).jpg",
+			"http://s9.knowsky.com/bizhi/l/1-5000/200952814217740135370.jpg",
+			"http://www.deskcar.com/desktop/fengjing/201372204940/12.jpg",
+			"http://dl.bizhi.sogou.com/images/2012/04/02/266240.jpg",
+			"http://a.hiphotos.baidu.com/zhidao/pic/item/0ff41bd5ad6eddc4f995afa438dbb6fd5266337a.jpg",
+			"http://www.deskcar.com/desktop/fengjing/2013729231159/5.jpg",
+			"http://image.tianjimedia.com/uploadImages/2012/010/XC4Y39BYZT9A.jpg",
+			"http://a.hiphotos.baidu.com/zhidao/pic/item/d009b3de9c82d158ac322ed0860a19d8bc3e421a.jpg",
+			"http://dl.bizhi.sogou.com/images/2014/04/25/591177.jpg"
+		];
+		var wrap = document.getElementById("wrap");
+		var uls = wrap.getElementsByTagName("ul");
+
+		// 初始化四个ul的高度都是0
+		var arrH = [];
+		for (var i = 0; i < uls.length; i++) {
+			arrH[i] = uls[i].offsetHeight;
+		}
+
+		function randFn(min, max) {
+			return parseInt(Math.random() * (max - min)) + min;
+		}
+
+		function minIndexFn(arr) {
+			var min = arr[0];
+			var minIndex = 0;
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i] < min) {
+					min = arr[i];
+					minIndex = i;
+				}
+			}
+			return minIndex;
+		}
+
+		function createLi(index) {
+			// 创建image对象
+			var img = new Image();
+			var imgSrc = imgAddressArray[index];
+			img.src = imgSrc;
+
+			var li = document.createElement("li");
+
+			img.onload = function() {
+				//原w / 原h == 200 / x
+				var x = 200 * this.height / this.width;
+
+				this.style.width = 200 + "px";
+				this.style.height = x + "px";
+
+				li.appendChild(this);
+
+				//                li.style.width = 200 + "px";
+				li.style.height = x + "px";
+				console.log(li);
+
+				var minIndex = minIndexFn(arrH);
+
+				uls[minIndex].appendChild(li);
+				arrH[minIndex] = uls[minIndex].offsetHeight;
+			}
+		}
+
+		for (var i = 0; i < imgAddressArray.length; i++) {
+			createLi(i);
+		}
+	</script>
+
+</html>

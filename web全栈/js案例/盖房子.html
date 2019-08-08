@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box {
+				width: 600px;
+				margin: 0 auto;
+				height: 300px;
+				border: 1px solid red;
+				overflow: hidden;
+				position: relative;
+			}
+
+			#wrap {
+				width: 600px;
+				position: absolute;
+				bottom: 0;
+				/*js控制变化*/
+			}
+
+			.row {
+				position: absolute;
+				/*width: 400px;*/
+				/*通过js来获取*/
+			}
+
+			.row div {
+				width: 20px;
+				height: 20px;
+				border: 1px solid black;
+				box-sizing: border-box;
+				float: left;
+				background-color: #ccc;
+				-webkit-transition: all 3s;
+				-webkit-transform: translate(0, 0) rotate(0deg);
+				opacity: 1;
+			}
+
+			.row div.remove {
+				-webkit-transform: translate(0, 100px) rotate(360deg);
+				opacity: 0;
+			}
+
+			#fraction {
+				text-align: center;
+				font-size: 50px;
+				color: red;
+				position: absolute;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="fraction">0</div>
+		<div class="box" id="box">
+			<div id="wrap">
+				<!--<div class="row">
+</div>-->
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		var wrap = document.getElementById("wrap");
+		var box = document.getElementById("box");
+		var fraction = document.getElementById("fraction");
+		var rowNum = 20; //一行块的个数
+		var pieceWidth = 20; //块的宽度
+		var b = 0;
+		var direction = true;
+		var time = 500;
+		var rowStart = 0;
+
+		function createRow() {
+			var row = document.createElement("div");
+			row.className = "row";
+			row.style.bottom = b + "px";
+			// row.style.left = "20px";
+			// row.direction = true;
+			// row.direction = true;//加着走
+			row.style.width = rowNum * pieceWidth + "px";
+			row.style.left = rowStart + "px";
+			wrap.appendChild(row);
+			// preRow = wrap.lastElementChild.previousElementSibling;
+			// alert(rowStart);
+			for (var i = 0; i < rowNum; i++) {
+				var piece = document.createElement("div");
+				row.appendChild(piece);
+			}
+			var maxWidth = wrap.clientWidth - row.offsetWidth;
+			row.timer = setInterval(function() {
+				if (direction) {
+					rowStart += 20;
+					if (rowStart >= maxWidth) {
+						direction = false;
+					}
+				} else {
+					rowStart -= 20;
+					if (rowStart <= 0) {
+						direction = true;
+					}
+				}
+				// alert(this);
+				//setInterval->this->window
+				row.style.left = rowStart + "px";
+			}, time);
+			return row;
+		}
+		createRow();
+		var clickBol = false;
+		box.onclick = function() {
+			if (clickBol == true) {
+				return;
+			}
+			clickBol = true;
+			fraction.innerHTML++;
+			setTimeout(function() {
+				clickBol = false;
+			}, 800);
+			time -= 50;
+			if (time <= 100) {
+				time = 100;
+			}
+			b += 20;
+			if (b > 200) {
+				wrap.style.bottom = -(b - 200) + "px";
+			}
+			var nowRow = wrap.lastElementChild; //现在在移动的哪一行
+			var nowPreRow = nowRow.previousElementSibling; //它的上一行
+			if (nowPreRow) {
+				var difference = nowRow.offsetLeft - nowPreRow.offsetLeft;
+			} else {
+				var difference = 0;
+			}
+			// alert('a');
+			var removeNum = difference / pieceWidth;
+			rowNum -= Math.abs(removeNum);
+			if (rowNum <= 0) {
+				alert("游戏结束");
+				clearInterval(nowRow.timer);
+				return;
+			}
+			var pieceNum = nowRow.children;
+			if (removeNum > 0) {
+				//超出
+				for (var i = 0; i < removeNum; i++) {
+					var removeObj = nowRow.children[pieceNum.length - i - 1];
+					removeObj.className = "remove";
+				}
+				setTimeout(function() {
+					for (var i = 0; i < removeNum; i++) {
+						nowRow.removeChild(nowRow.lastElementChild);
+					}
+				}, 1000);
+			} else {
+				//少了
+				removeNum = Math.abs(removeNum);
+				for (var i = 0; i < removeNum; i++) {
+					var removeObj = nowRow.children[i];
+					removeObj.className = "remove";
+				}
+				var iLastLeftNumber = nowRow.offsetLeft;
+				setTimeout(function() {
+					for (var i = 0; i < removeNum; i++) {
+						nowRow.removeChild(nowRow.firstElementChild);
+					}
+					nowRow.style.left = iLastLeftNumber + removeNum * 20 + "px";
+				}, 3000);
+			}
+			var row = createRow();
+			preRow = row.previousElementSibling;
+			if (preRow != null) {
+				clearInterval(preRow.timer);
+			}
+		}
+	</script>
+
+</html>

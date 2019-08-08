@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#div1 {
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+	</body>
+	<script type="text/javascript">
+		var div1 = document.querySelector("#div1");
+
+		div1.onmousedown = function(ev) {
+
+			var ev = ev || window.event;
+			var disX = ev.clientX - div1.offsetLeft;
+			var disY = ev.clientY - div1.offsetTop;
+
+			document.onmousemove = function(ev) {
+
+				var ev = ev || window.event;
+				var x = ev.clientX - disX;
+				var y = ev.clientY - disY;
+
+				div1.style.left = x + "px";
+				div1.style.top = y + "px";
+			}
+			document.onmouseup = function() {
+				document.onmousemove = null;
+			}
+		}
+	</script>
+</html>

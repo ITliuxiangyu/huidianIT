@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#ul1 {
+				position: absolute;
+				display: none;
+			}
+
+			ul {
+				list-style: none;
+			}
+
+			li {
+				position: relative;
+				background-color: #ccc;
+				width: 100px;
+				text-align: center;
+				/*color: white;*/
+			}
+
+			li>ul {
+				width: 100px;
+				position: absolute;
+				left: 98px;
+				top: -2px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="ul1">
+			<li>我是li1</li>
+			<li>我是li2</li>
+			<li>我是li3
+				<ul>
+					<li>我是li3下的li1</li>
+					<li>我是li3下的li2</li>
+					<li>我是li3下的li3</li>
+				</ul>
+			</li>
+			<li>我是li4
+				<ul>
+					<li>我是li4下的li1</li>
+					<li>我是li4下的li2
+						<ul>
+							<li>我是li3下的li1</li>
+							<li>我是li3下的li2</li>
+							<li>我是li3下的li3</li>
+						</ul>
+					</li>
+					<li>我是li4下的li3</li>
+				</ul>
+			</li>
+			<li>我是li5</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var ul1 = document.querySelector("#ul1");
+		var lis = document.querySelectorAll("#ul1 li");
+		document.oncontextmenu = function(ev) {
+
+			var ev = ev || window.event;
+
+			var x = ev.clientX;
+			var y = ev.clientY;
+
+			ul1.style.display = "block";
+			ul1.style.left = x + "px";
+			ul1.style.top = y + "px";
+
+			return false;
+		}
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].onclick = function(ev) {
+
+				var ev = ev || window.event;
+				ev.cancelBubble = true;
+			}
+			lis[i].onmouseenter = function() {
+
+				var children = this.children;
+				if (children.length > 0) {
+					if (children[0].tagName == "UL") {
+						children[0].style.display = "block";
+					}
+				}
+			}
+			lis[i].onmouseleave = function() {
+
+				var children = this.children;
+				if (children.length > 0) {
+					if (children[0].tagName == "UL") {
+						children[0].style.display = "none";
+					}
+				}
+			}
+		}
+		document.onclick = function() {
+			ul1.style.display = "none";
+		}
+	</script>
+</html>

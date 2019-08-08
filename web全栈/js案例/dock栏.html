@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				background-color: lightseagreen;
+			}
+			.wrap {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				text-align: center;
+			}
+
+			.wrap img {
+				width: 50px;
+				/* height: 50px; */
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap" class="wrap">
+			<img src="res/5.jpg" alt="" />
+			<img src="res/6.jpg" alt="" />
+			<img src="res/7.jpg" alt="" />
+			<img src="res/8.jpg" alt="" />
+			<img src="res/9.jpg" alt="" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+
+			var imgs = document.querySelectorAll("img");
+			var wrap = document.querySelector("#wrap");
+			var maxWidth = 100;
+			var maxDis = 300;
+
+			document.onmousemove = function(ev) {
+
+				var ev = ev || window.event;
+				var x = ev.clientX;
+				var y = ev.clientY;
+
+				for (var i = 0; i < imgs.length; i++) {
+					var centerX = imgs[i].offsetLeft + imgs[i].offsetWidth / 2;
+					var centerY = wrap.offsetTop + imgs[i].offsetHeight / 2;
+
+					var disX = centerX - x;
+					var disY = centerY - y;
+
+					var slanting = Math.sqrt(disX * disX + disY * disY);
+
+					var scale = 1 - slanting / maxDis;
+
+					if (scale <= 0.5) {
+						scale = 0.5;
+					}
+
+					imgs[i].style.width = scale * maxWidth + "px";
+				}
+
+
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.warp {
+				width: 600px;
+				height: 165px;
+				margin: 20px auto;
+				border-radius: 4px;
+				border: 1px solid #ddd;
+				padding: 0 10px;
+			}
+
+			.warp-head {
+				width: 100%;
+				height: 24px;
+				padding-top: 4px;
+				overflow: hidden;
+			}
+
+			.head-logo {
+				width: 40%;
+				float: left;
+			}
+
+			.head-txt {
+				padding: 4px 0;
+				width: 60%;
+				float: right;
+			}
+
+			.head-using {
+				text-align: right;
+				font-size: 13px;
+				color: #ccc;
+			}
+
+			.head-txt a {
+				font-size: 12px;
+				color: #eb7350;
+				text-decoration: none;
+			}
+
+			.main-txt {
+				border: 1px solid #ccc;
+				width: 98%;
+				height: 68px;
+				margin: 4px 0 0;
+				padding: 5px;
+				box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15) inset;
+			}
+
+			.clicked {
+				border: 1px solid #eb7350;
+				box-shadow: none;
+			}
+
+			.main-txt textarea {
+				border: none;
+				width: 100%;
+				height: 66px;
+				outline: none;
+				resize: none;
+				color: #333;
+			}
+
+			.warp-footer {
+				width: 100%;
+				height: 40px;
+				margin: 6px 0;
+				overflow: hidden;
+			}
+
+			.warp-icon-cont {
+				width: 65%;
+				float: left;
+				margin-top: 10px;
+			}
+
+			.warp-icon-cont ul li {
+				display: inline-block;
+				margin-right: 15px;
+				cursor: pointer;
+			}
+
+			.warp-icon-cont a {
+				font-size: 12px;
+				color: #333;
+				text-decoration: none;
+				height: 20px;
+				margin-left: 5px;
+				display: block;
+				width: 25px;
+				float: right;
+				line-height: 20px;
+			}
+
+			.warp-icon-cont a:hover {
+				color: #eb7350;
+			}
+
+			.warp-icon-cont img {
+				width: 20px;
+				height: 20px;
+			}
+
+			.warp-footer-btns {
+				width: 35%;
+				float: right;
+				overflow: hidden;
+				margin-top: 3px;
+			}
+
+			.release-btn {
+				width: 80px;
+				height: 28px;
+				float: right;
+				background-color: #ffc09f;
+				border: 4px solid #fbbd9e;
+				cursor: pointer;
+				border-radius: 2px;
+			}
+
+			.release-btn a {
+				display: block;
+				color: #fff;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				text-align: center;
+				text-decoration: none;
+				font-size: 15px;
+			}
+
+			.btn-active {
+				border: 1px solid #f77c3d;
+				background-color: #ff8140;
+			}
+
+			.txt-beyond {
+				color: red;
+				text-align: right;
+				font-size: 13px;
+			}
+
+			.show {
+				width: 600px;
+				margin: 20px auto;
+			}
+
+			.show-content {
+				width: 578px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				margin-bottom: 10px;
+				padding: 10px;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.show-name {
+				width: 100%;
+				text-align: left;
+				font-size: 14px;
+				color: #333;
+				font-weight: bold;
+			}
+
+			.show-txt {
+				width: 100%;
+				color: #444;
+				font-size: 14px;
+				margin-top: 10px;
+			}
+
+			.show-txt p {
+				width: 100%;
+				word-wrap: break-word;
+			}
+
+			.show-time {
+				font-size: 12px;
+				color: #808080;
+				margin-top: 10px;
+			}
+
+			.show-close {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				font-size: 12px;
+				color: #ccc;
+				cursor: pointer;
+				-webkit-transition: all .5s;
+				transition: all .5s;
+			}
+
+			.show-close:hover {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="warp">
+			<div class="warp-head">
+				<div class="head-logo">
+					<img src="img/xx.png" />
+				</div>
+				<div class="head-txt" id="headTxt">
+					<a href="javascript:void(0)">置办年货省省省！红包在手年货无忧！点击领取年货红包&nbsp;&nbsp;&nbsp;热门微博</a>
+				</div>
+			</div>
+			<div class="main-txt" id="mainTxt">
+				<textarea name="" rows="" cols="" id="mainArea"></textarea>
+			</div>
+			<div class="warp-footer">
+				<div class="warp-icon-cont">
+					<ul>
+						<li><img src="img/wb1.png" alt="" /><a href="javascript:void(0)">表情</a></li>
+						<li><img src="img/wb2.png" alt="" /><a href="javascript:void(0)">图片</a></li>
+						<li><img src="img/wb3.png" alt="" /><a href="javascript:void(0)">视频</a></li>
+						<li><img src="img/wb4.png" alt="" /><a href="javascript:void(0)">话题</a></li>
+						<li><img src="img/wb5.png" alt="" /><a href="javascript:void(0)">文章</a></li>
+					</ul>
+				</div>
+				<div class="warp-footer-btns">
+					<div class="release-btn" id="releaseBtn">
+						<a href="javascript:void(0)">发布</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="show" class="show">
+
+		</div>
+
+		<script type="text/javascript">
+			function getID(id) {
+				return document.getElementById(id);
+			}
+
+			var headTxt = getID("headTxt"),
+				mainTxt = getID("mainTxt"),
+				mainArea = getID("mainArea"),
+				releaseBtn = getID("releaseBtn");
+
+			var txtNum = 140; //限制字数
+			var beyondNum = 0; //超出字数
+
+
+			mainTxt.onclick = function(event) {
+				event = event || window.event;
+				if (event.stopPropagation) {
+					event.stopPropagation();
+				} else {
+					event.cancelBubble = true;
+				}
+				if (mainTxt.className == "main-txt") {
+					mainTxt.className += " clicked";
+					headTxt.className += " head-using";
+					headTxt.innerHTML = "还可以输入" + txtNum + "字";
+				}
+			}
+
+			document.onclick = function() {
+				mainTxt.className = "main-txt";
+				headTxt.className = "head-txt";
+				headTxt.innerHTML = "";
+				var aTxt = "置办年货省省省！红包在手年货无忧！点击领取年货红包&nbsp;&nbsp;&nbsp;热门微博";
+				var a = document.createElement("a");
+				a.href = "javascript:void(0)";
+				a.innerHTML = aTxt;
+				headTxt.appendChild(a);
+				if (!mainArea.value) {
+					releaseBtn.className = "release-btn";
+				}
+			}
+
+			mainArea.onkeyup = function() {
+				txtNum = 140 - (this.value).length;
+				headTxt.innerHTML = "还可以输入" + txtNum + "字";
+				releaseBtn.className = "release-btn btn-active";
+				headTxt.className = "head-txt head-using";
+				if (txtNum < 0) {
+					beyondNum = (this.value).length - 140;
+					headTxt.innerHTML = "已超出" + beyondNum + "字";
+					headTxt.className = "head-txt txt-beyond";
+					releaseBtn.className = "release-btn";
+				}
+			}
+
+			releaseBtn.onclick = function() {
+				if (txtNum == 140) {
+					alert("内容为空，无法发布！");
+				} else if (txtNum < 0) {
+					alert("内容超出，无法发布！")
+				} else {
+
+					addShow();
+
+					mainArea.value = "";
+					txtNum = 140;
+					beyondNum = 0;
+				}
+			}
+
+			function createDIV() {
+				return document.createElement("div");
+			}
+
+			var show = getID("show");
+
+			function addShow() {
+				var showContent = createDIV(),
+					showName = createDIV(),
+					showTxt = createDIV(),
+					showTime = createDIV(),
+					showClose = createDIV(),
+					showP = document.createElement("p");
+
+				showContent.className = "show-content";
+				showName.className = "show-name";
+				showTxt.className = "show-txt";
+				showTime.className = "show-time";
+				showClose.className = "show-close";
+
+				showTxt.appendChild(showP);
+
+				showName.innerHTML = "Xx";
+				showP.innerHTML = mainArea.value;
+				showTime.innerHTML = getTime();
+				showClose.innerHTML = "x";
+
+				showContent.appendChild(showName);
+				showContent.appendChild(showTxt);
+				showContent.appendChild(showTime);
+				showContent.appendChild(showClose);
+
+				if (show.children[0]) {
+					show.insertBefore(showContent, show.children[0]);
+				} else {
+					show.appendChild(showContent);
+				}
+
+				addMove(showContent);
+
+				showClose.onclick = function() {
+					removeMove(showContent);
+					setTimeout(function() {
+						show.removeChild(showContent);
+					}, 600);
+				}
+			}
+
+			function getTime() {
+				var myDate = new Date(),
+					nowMonth = myDate.getMonth(),
+					nowDay = myDate.getDate(),
+					nowHover = myDate.getHours(),
+					nowMinutes = myDate.getMinutes();
+
+				var nowDate = nowMonth + 1 + "月" + nowDay + "日 " + nowHover + ":" + nowMinutes + " 发布";
+				return nowDate;
+			}
+			//            var a = getTime();
+			//            console.log(a);
+
+			var timer = null;
+
+			function addMove(ele) {
+				var start = -151;
+				var change = 151;
+				var t = 0;
+				var d = 20;
+
+				clearInterval(timer);
+				timer = setInterval(function() {
+					t++;
+					if (t >= d) {
+						clearInterval(timer);
+					}
+					ele.style.top = Tween.Expo.easeIn(t, start, change, d) + "px";
+				}, 30);
+			}
+
+			function removeMove(ele) {
+				var start = parseInt(getComputedStyle(ele, null).height);
+				var end = 0;
+				var change = end - start;
+				//                console.log(change);
+				var t = 0;
+				var d = 20;
+
+				clearInterval(timer);
+				timer = setInterval(function() {
+					t++;
+					if (t >= d) {
+						clearInterval(timer);
+					}
+					ele.style.height = Tween.Linear(t, start, change, d) + "px";
+					ele.style.padding = "0 10px";
+				}, 30);
+			}
+		</script>
+		<script src="tween.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

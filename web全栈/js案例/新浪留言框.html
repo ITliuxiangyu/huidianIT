@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>新浪微博</title>
+		<style>
+			* {
+padding: 0;
+margin: 0;
+}
+
+li {
+list-style: none;
+}
+
+body {
+background: #f9f9f9;
+font-size: 14px;
+}
+
+#box {
+width: 450px;
+padding: 10px;
+border: 1px solid #ccc;
+background: #f4f4f4;
+margin: 10px auto;
+}
+
+#fill_in {
+margin-bottom: 10px;
+}
+
+#fill_in li {
+padding: 5px 0;
+}
+
+#fill_in .text {
+width: 380px;
+height: 30px;
+padding: 0 10px;
+border: 1px solid #ccc;
+line-height: 30px;
+font-size: 14px;
+font-family: arial;
+}
+
+#fill_in textarea {
+width: 380px;
+height: 100px;
+line-height: 20px;
+padding: 5px 10px;
+border: 1px solid #ccc;
+font-size: 14px;
+font-family: arial;
+overflow: auto;
+vertical-align: top;
+}
+
+#fill_in .btn {
+border: none;
+width: 100px;
+height: 30px;
+border: 1px solid #ccc;
+background: #fff;
+color: #666;
+font-size: 14px;
+position: relative;
+left: 42px;
+}
+
+#message_text h3 {
+font-size: 14px;
+padding: 6px 0 4px 10px;
+background: #ddd;
+border-bottom: 1px solid #ccc;
+}
+
+#message_text li {
+background: #f9f9f9;
+border-bottom: 1px solid #ccc;
+color: #666;
+overflow: hidden;
+}
+
+#message_text li a {
+float: right;
+}
+
+#message_text h3 {
+padding: 10px;
+font-size: 14px;
+line-height: 24px;
+}
+
+#message_text p {
+padding: 0 10px 10px;
+text-indent: 28px;
+line-height: 20px;
+}
+</style>
+		<script src="tween.js"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			<ul id="fill_in">
+				<form>
+					<li>姓名：<input id="txt1" type="text" class="text" /></li>
+					<li>内容：<textarea id="txt2"></textarea></li>
+					<li><input id="btn" type="button" value="提交" class="btn" /></li>
+				</form>
+			</ul>
+			<div id="message_text">
+				<h2>显示留言</h2>
+				<ul>
+					<!--<li><h3>名字</h3><p>内容<a href="###">删除</a></p></li>-->
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var user = document.getElementById("txt1");
+		var content = document.getElementById("txt2");
+		var btn = document.getElementById("btn");
+		var ul1 = document.getElementById("message_text").getElementsByTagName("ul")[0];
+		btn.onclick = function() {
+			var userValue = user.value;
+			var contentValue = content.value;
+			if (userValue == "" || contentValue == "") {
+				alert("输入为控");
+				return;
+			}
+			var li = document.createElement("li");
+			li.innerHTML = '<h3>' + userValue + '</h3><p>' + contentValue + '<a href="###">删除</a></p>';
+			ul1.insertBefore(li, ul1.firstElementChild);
+			var end = li.offsetHeight; //只能获取html页面中元素的高度
+			// alert(end);
+			var start = 0;
+			var c = end - start;
+			var t = 0;
+			var d = 30;
+			var link1 = li.getElementsByTagName("a")[0];
+			link1.onclick = function() {
+				ul1.removeChild(li);
+			}
+		}
+	</script>
+
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPEhtml>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			body {
+
+				background-color: rgb(73, 74, 95);
+
+			}
+
+			#wrap {
+
+				margin: 200px auto 0;
+				height: 660px;
+				/* width: 880px;*/
+
+			}
+
+			#wrap>div {
+				float: left;
+				width: 200px;
+				height: 200px;
+				background-color: white;
+				border: 1px solid rgb(73, 74, 95);
+				border-radius: 10px;
+				box-sizing: border-box;
+				perspective: 800px;
+
+			}
+
+			.baner {
+				height: 200px;
+				width: 200px;
+				background-color: #2ec1a4;
+				border-radius: 10px;
+				border: 1px solid #2ec1a4;
+				box-sizing: border-box;
+				font-size: 40px;
+				text-align: center;
+				line-height: 200px;
+				color: white;
+			}
+
+			.move1 {
+				-webkit-animation: "move1"0.2s linear 1 forwards;
+			}
+
+			.move2 {
+				-webkit-animation: "move2"0.2s linear 1 forwards;
+			}
+
+			.move3 {
+				-webkit-animation: "move3"0.2s linear 1 forwards;
+			}
+
+			.move4 {
+				-webkit-animation: "move4"0.2s linear 1 forwards;
+			}
+
+			.move-4 {
+				-webkit-animation: "move-4"0.2s linear 1 forwards;
+			}
+
+			.move-3 {
+				-webkit-animation: "move-3"0.2s linear 1 forwards;
+			}
+
+			.move-2 {
+				-webkit-animation: "move-2"0.2s linear 1 forwards;
+			}
+
+			.move-1 {
+				-webkit-animation: "move-1"0.2s linear 1 forwards;
+			}
+
+
+			@-webkit-keyframes move1 {
+				0% {
+					-webkit-transform: rotateX(-90deg);
+
+				}
+
+				100% {
+					-webkit-transform: rotateX(0deg);
+
+				}
+			}
+
+
+			@-webkit-keyframes move2 {
+				0% {
+					-webkit-transform: rotateY(-90deg);
+
+				}
+
+				100% {
+					-webkit-transform: rotateY(0deg);
+
+				}
+			}
+
+			@-webkit-keyframes move3 {
+				0% {
+					-webkit-transform: rotateX(90deg);
+
+				}
+
+				100% {
+					-webkit-transform: rotateX(0deg);
+
+				}
+			}
+
+			@-webkit-keyframes move4 {
+				0% {
+					-webkit-transform: rotateY(90deg);
+
+				}
+
+				100% {
+					-webkit-transform: rotateY(0deg);
+
+				}
+
+			}
+
+			@-webkit-keyframes move-1 {
+				0% {
+					-webkit-transform: rotateX(0deg);
+
+				}
+
+				99% {
+					opacity: 1;
+				}
+
+
+				100% {
+					opacity: 0;
+					-webkit-transform: rotateX(-90deg);
+
+				}
+			}
+
+
+			@-webkit-keyframes move-2 {
+				0% {
+					-webkit-transform: rotateY(0deg);
+
+				}
+
+				99% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0;
+					-webkit-transform: rotateY(-90deg);
+
+				}
+			}
+
+			@-webkit-keyframes move-3 {
+				0% {
+					-webkit-transform: rotateX(0deg);
+
+				}
+
+				99% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0;
+					-webkit-transform: rotateX(90deg);
+
+				}
+			}
+
+			@-webkit-keyframes move-4 {
+				0% {
+					-webkit-transform: rotateY(0deg);
+
+				}
+
+				99% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0;
+					-webkit-transform: rotateY(90deg);
+				}
+			}
+
+			.div1 {
+				-webkit-transform-origin: top left;
+			}
+
+			.div2 {
+				-webkit-transform-origin: top right;
+			}
+
+			.div3 {
+				-webkit-transform-origin: bottom right;
+			}
+
+			.div4 {
+				-webkit-transform-origin: bottom left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap"></div>
+	</body>
+	<script type="text/javascript">
+		var wrap = document.getElementById('wrap');
+		var num = 4;
+		var NumPow = Math.pow(num, 2)
+		for (var i = 0; i < NumPow; i++) {
+			var div1 = document.createElement('div');
+			var div = document.createElement('div');
+			div.appendChild(div1);
+			wrap.appendChild(div);
+		}
+
+		wrap.style.width = div.offsetWidth * num + 'px';
+		var x = 0;
+		var y = 0;
+		var divs = document.querySelectorAll('#wrap>div');
+		window.onmousemove = function(ev) {
+			var ev = ev || window.event;
+			//     ev.cancelBubble
+			x = ev.pageX;
+			y = ev.pageY;
+		}
+		for (var i = 0; i < NumPow; i++) {
+			divs[i].index = i;
+			divs[i].onmouseenter = function() {
+				var nowx = x;
+				var nowy = y;
+				var child1 = divs[this.index].firstElementChild;
+				child1.innerHTML = '就这样了!';
+				var shang = nowy - divs[this.index].offsetTop;
+				var you = divs[this.index].offsetLeft + divs[this.index].offsetWidth - nowx;
+				var xia = divs[this.index].offsetTop + divs[this.index].offsetHeight - nowy;
+				var zuo = nowx - divs[this.index].offsetLeft;
+				var arr = [shang, you, xia, zuo]
+				var tem = shang;
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i] < tem) {
+						tem = arr[i];
+					}
+				}
+
+				var child1 = divs[this.index].firstElementChild;
+				if (tem == zuo) {
+					child1.className = 'move4 baner div4';
+				}
+				if (tem == shang) {
+					child1.className = 'move1 baner div1';
+				}
+				if (tem == xia) {
+					child1.className = 'move3 baner div3';
+				}
+				if (tem == you) {
+					child1.className = 'move2 baner div2';
+				}
+			}
+
+
+			divs[i].onmouseleave = function() {
+				var nowx = x;
+				var nowy = y;
+				var child1 = divs[this.index].firstElementChild;
+				child1.innerHTML = '就这样了!'
+				
+				
+				var shang = nowy - divs[this.index].offsetTop;
+				var you = divs[this.index].offsetLeft + divs[this.index].offsetWidth - nowx;
+				var xia = divs[this.index].offsetTop + divs[this.index].offsetHeight - nowy;
+				var zuo = nowx - divs[this.index].offsetLeft;
+				
+				
+				var arr = [shang, you, xia, zuo]
+				var tem = shang;
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i] < tem) {
+						tem = arr[i];
+					}
+				}
+
+				if (tem == zuo) {
+					child1.className = 'move-4 baner div4';
+				}
+				if (tem == shang) {
+					child1.className = 'move-1 baner div1';
+				}
+				if (tem == xia) {
+					child1.className = 'move-3 baner div3';
+				}
+				if (tem == you) {
+					child1.className = 'move-2 baner div2';
+				}
+
+			}
+		}
+	</script>
+</html>

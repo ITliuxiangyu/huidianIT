@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				width: 2000px;
+				height: 2000px;
+			}
+
+			div {
+				width: 100px;
+				height: 200px;
+				background-color: #ccc;
+				position: absolute;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">显示的内容</div>
+	</body>
+	<script type="text/javascript">
+		var div1 = document.querySelector("#div1");
+		var windowWidth = document.documentElement.clientWidth;
+		var windowHeight = document.documentElement.clientHeight;
+
+
+
+		// alert(div1.offsetWidth);
+		//如果元素是display:none;是获取不到宽高的
+		document.oncontextmenu = function(ev) {
+			div1.style.display = 'block';
+			var maxWidth = windowWidth - div1.offsetWidth;
+			var maxHeight = windowHeight - div1.offsetHeight;
+
+			var ev = ev || window.event;
+
+			// var x = ev.pageX;
+			// var y = ev.pageY;
+			var scrollLeft = document.body.scrollLeft;
+			var scrollTop = document.body.scrollTop;
+
+			var x = ev.clientX + scrollLeft;
+			var y = ev.clientY + scrollTop;
+
+			if (x > maxWidth + scrollLeft) {
+				x = x - div1.offsetWidth;
+			}
+			if (y > maxHeight + scrollTop) {
+				y = y - div1.offsetHeight;
+			}
+
+			div1.style.left = x + "px";
+			div1.style.top = y + "px";
+
+			return false;
+		}
+		document.onclick = function() {
+			div1.style.display = "none";
+		}
+	</script>
+</html>

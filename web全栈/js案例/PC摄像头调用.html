@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>html5调用摄像头实现拍照</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style type="text/css">
+			#video{
+				border: 3px solid brown;
+			}
+		</style>
+	</head>
+	<body>
+		<video id="video" controls width="500" height="500"></video>
+		<button id="paizhao">拍照</button>
+		<canvas id="canvas" width="320" height="480"></canvas>
+
+	</body>
+
+	<script type="text/javascript">
+		var video = document.getElementById("video");
+		var context = canvas.getContext("2d");
+		console.log("xxxxx");
+		var errocb = function() {
+			console.log("没进来getUserMedia");
+		}
+		
+	
+		if (navigator.getUserMedia) {
+			console.log("我进来getUserMedia了");
+			navigator.getUserMedia({
+				video: {width: 500, height: 500},
+                audio: false
+			}, function(stream) {
+				console.log(stream)
+				video.srcObject = stream;
+				video.oncanplay = function () {
+					console.log("视频能播放了")
+					video.play();
+				}
+				
+			}, errocb);
+		} else if (navigator.webkitGetUserMedia) {
+			console.log("jklasdf");
+			navigator.webkitGetUserMedia({
+				"video": true
+			}, function(stream) {
+				console.log("jakljsdfasd");
+				console.log("jkalsdf");
+				video.src = window.webkitURL.createObjectURL(stream);
+				video.play();
+				
+			}, errocb);
+		}
+		document.getElementById("paizhao").addEventListener("click", function() {
+			context.drawImage(video, 0, 0, 320, 480);
+		});
+
+		//      var interval = setInterval(function catchCode() {
+		// var canvas = document.getElementById("canvas");
+		// // 开始编码数据
+		// var imgData = canvas.toDataURL();
+		// // 将图像转化为base64数据
+		// var base64Data = imgData.substr(22);
+		// // 在前端截取22位之后的字符串作为图像数据
+		// // 开始异步上传
+		// // $.post("uploadImgCode.ashx" , {"img":base64Data} , function (data , status) {
+		// // if (status == "success") {
+		// // if (data == "OK") {
+		// // alert("二维码已经解析");
+		// // } else {
+		// // alert(data);
+		// // }
+		// // } else {
+		// // alert("数据上传失败");
+		// // }
+		// // } , "text");
+		// }, 300);
+	</script>
+</html>
