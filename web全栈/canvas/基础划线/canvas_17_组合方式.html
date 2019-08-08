@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<style>
+			#canvas1 {
+				box-shadow: 3px 3px 10px black;
+				/* background-color: black; */
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas1" width="500" height="500">
+			你的浏览器不支持canvas,请使用高版本的浏览器
+		</canvas>
+
+
+	</body>
+	<script>
+		var canvas = document.getElementById("canvas1");
+		var context = canvas.getContext("2d");
+
+		// 画两个圆	
+		context.fillStyle = "red";
+		context.beginPath();
+		context.arc(200, 250, 100, 0, Math.PI * 2, true);
+		context.closePath();
+		context.fill();
+
+		context.globalCompositeOperation = "destination-out"
+
+
+		// source-in  只保留当前图的重叠部分
+		// source-out 设置组合方式 只保留当前图未重叠的部分
+		// destination-over 置组合方式 当前图显示在下面
+		// destination-in 设置组合方式 只保留原图重叠的部分
+		// destination-out 设置组合方式 只保留原图未处理的部分
+		// destination-atop 设置组合方式 保留原图重叠部分和新图未重叠部分
+		// lighter 设置组合方式 保留图,并且使重叠部分颜色叠加
+		// copy 设置组合方式 只保留新图
+		// xor  使用异或操作对源图像与目标图像进行组合
+		context.fillStyle = "green";
+		context.beginPath();
+		context.arc(300, 250, 100, 0, Math.PI * 2, true);
+		context.closePath();
+		context.fill();
+	</script>
+
+</html>

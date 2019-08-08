@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #image {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 300px;
+            height: 500px;
+        }
+        
+        #canvas1 {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="liuyifei.jpg" id="image">
+    <canvas id="canvas1" width="300" height="500"></canvas>
+</body>
+<script type="text/javascript">
+    //获取canvas 
+    var canvas = document.getElementById("canvas1");
+    //获取绘图环境
+    var context = canvas.getContext("2d");
+
+    //绘制灰色蒙版
+    context.fillStyle = "gray";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    //设置组合方式
+    context.globalCompositeOperation = "destination-out";
+    //起点
+    var startX = 0;
+    var startY = 0;
+    context.lineWidth = "20";
+    context.lineCap = "round"
+    var endX = 0;
+    var endY = 0;
+    //保存
+    context.save();
+    //标识量
+    var isDown = false;
+    //down
+    canvas.onmousedown = function(e) {
+            //记录起点
+            startX = e.offsetX;
+            startY = e.offsetY;
+            isDown = true;
+
+        }
+        //up
+    canvas.onmouseup = function() {
+            isDown = false;
+        }
+        //move
+    canvas.onmousemove = function(e) {
+        //如果鼠标没有点下去 就结束方法 
+        if (!isDown) {
+            return;
+        }
+        //终点
+        endX = e.offsetX;
+        endY = e.offsetY;
+        //
+        context.moveTo(startX, startY);
+        context.lineTo(endX, endY);
+        //绘制
+        context.strokeStyle = "red";
+        context.stroke();
+        //更新起点
+        startX = endX;
+        startY = endY;
+        //判断百分比
+        var b = BaiFenBi(0,0,canvas.width,canvas.height);
+        if(b > 40){
+        //隐藏
+        canvas.style.display = "none";
+        }
+
+    }
+
+    //获取百分比
+    function BaiFenBi(x, y, width, height) {
+        //获取像素
+        var imageData = context.getImageData(x, y, width, height);
+        var piexls = imageData.data;
+        var count = 0;
+        //遍历所有的像素值
+        for (var i = 0; i < piexls.length; i += 4) {
+            //透明度 alpha
+            var a = piexls[i + 3];
+            //判断
+            if (a < 128) {
+                count++;
+            }
+        }
+        //计算百分比,保留两位
+        var b = ((count / (piexls.length / 4)) * 100).toFixed(2);
+        return b;
+    }
+</script>
+
+</html>

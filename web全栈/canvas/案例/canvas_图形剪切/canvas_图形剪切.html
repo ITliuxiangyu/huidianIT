@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #canvas1 {
+            box-shadow: 3px 3px 10px black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas1" width="500" height="500"></canvas>
+</body>
+<script>
+    var canvas = document.getElementById("canvas1");
+    var context = canvas.getContext('2d');
+    // 图片的剪切
+    var myImage = new Image();
+    myImage.src = "liuyifei.jpg ";
+
+    // 准备一个路径
+    //        context.beginPath();
+    context.moveTo(100, 100);
+    context.lineTo(200, 100);
+    context.lineTo(200, 200);
+    context.lineTo(100, 200);
+    // context.arc(300 , 300 , 200 , 0 , 2 * Math.PI);
+    context.strokeStyle = "red ";
+    context.stroke();
+
+    myImage.onload = function() {
+        context.drawImage(myImage, 0, 0, canvas.width, canvas.height);
+    }
+
+    // 剪切
+    context.clip();
+</script>
+
+</html>

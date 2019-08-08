@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			
+		
+			#canvas1 {
+				box-shadow: 3px 3px 10px black;
+				/* background-color: black; */
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="500" height="500">
+			你的浏览器不支持canvas,请使用高版本的浏览器
+		</canvas>
+	</body>
+	<script type="text/javascript">
+		
+		// 平移
+		// 获取canvas
+		var canvas = document.getElementById("canvas1");
+		//获取绘制环境
+		var context = canvas.getContext("2d");
+		context.fillStyle = "blue";
+		context.fillRect(0,0,100,100);
+		
+		// 平移之前擦除原来的
+		// //擦除
+		context.clearRect(0,0,canvas1.width,canvas1.height);
+		
+		//平移
+		context.translate(150,150);
+		context.fillStyle = "red";
+		context.fillRect(0,0,100,100);
+		
+	</script>
+</html>

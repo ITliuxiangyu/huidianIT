@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body style="background: black;">
+    <canvas id="canvas" style="display:block;margin:0 auto;border:1px solid #aaa;">
+    您的浏览器尚不支持canvas
+    </canvas>
+
+    <canvas id="watermarkCanvas" style="display:none;margin:0 auto;border:1px solid #aaa;">
+            您的浏览器尚不支持canvas
+    </canvas>
+
+</body>
+
+<script>
+    var canvas = document.getElementById("canvas")
+    var context = canvas.getContext("2d")
+    var image = new Image()
+
+    function drawImageByScale(scale) {
+        var imageWidth = 1152 * scale
+        var imageHeight = 768 * scale
+        x = canvas.width / 2 - imageWidth / 2
+        y = canvas.height / 2 - imageHeight / 2
+        context.clearRect(0, 0, canvas.width, canvas.height)
+        context.drawImage(image, x, y, imageWidth, imageHeight)
+    }
+    window.onload = function() {
+        canvas.width = 1152
+        canvas.height = 768
+        image.src = "liuyifei.jpg"
+        image.onload = function() {
+            drawImageByScale(1)
+
+
+            // 设置水印canvas
+            //setup watermark canvas
+            watermarkCanvas.width = 600
+            watermarkCanvas.height = 100
+
+            var watermarkContext = watermarkCanvas.getContext("2d")
+
+            watermarkContext.font = "bold 50px Arial"
+            watermarkContext.lineWidth = "1"
+            watermarkContext.fillStyle = "rgba( 255 , 255 , 255 , 0.5 )"
+            watermarkContext.textBaseline = "middle";
+            watermarkContext.fillText("== huidianIT.com ==", 20, 50)
+
+            // 然后把该水印canvas画在图片canvas上就行
+            // 比如这样来添加
+            context.drawImage(watermarkCanvas, canvas.width - watermarkCanvas.width, canvas.height - watermarkCanvas.height)
+
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			
+		
+			#canvas1 {
+				box-shadow: 3px 3px 10px black;
+				/* background-color: black; */
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="500" height="500">
+			你的浏览器不支持canvas,请使用高版本的浏览器
+		</canvas>
+	</body>
+	<script type="text/javascript">
+		
+		var canvas = document.getElementById("canvas1");
+		var context = canvas.getContext("2d");
+		
+		// 背景
+		ctx = canvas1.getContext("2d");
+		ctx.beginPath();
+		var grad1 = ctx.createRadialGradient(0, 0, 0, 0, 0, 600);
+		grad1.addColorStop(0, '#ffff00');
+		grad1.addColorStop(0.5, '#ff14eb');
+		grad1.addColorStop(1, '#00ffff');
+		ctx.fillStyle = grad1;
+		ctx.fillRect(0, 0, 500, 500);
+		
+	</script>
+</html>

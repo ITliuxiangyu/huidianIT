@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+
+
+			#canvas1 {
+				box-shadow: 3px 3px 10px black;
+				/* background-color: black; */
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="500" height="500">
+			你的浏览器不支持canvas,请使用高版本的浏览器
+		</canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas1");
+		var context = canvas.getContext("2d");
+
+
+		//封装绘制圆角矩形的函数
+		function roundRect(x, y, w, h, r) {
+			context.beginPath()
+			context.moveTo(x, y + r)
+			context.arcTo(x, y, x + w, y, r)
+			context.arcTo(x + w, y, x + w, y + h, r)
+			context.arcTo(x + w, y + h, x, y + h, r)
+			context.arcTo(x, y + h, x, y, r)
+			context.closePath()
+			context.stroke()
+		}
+
+	
+
+		for (var i = 0; i < 10; i++) {
+			roundRect(50 * i, 5 * i, i * 30, i * 30, 5 * i)
+		}
+
+	</script>
+</html>

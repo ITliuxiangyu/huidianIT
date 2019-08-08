@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			
+		
+			#canvas1 {
+				box-shadow: 3px 3px 10px black;
+				/* background-color: black; */
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="500" height="500">
+			你的浏览器不支持canvas,请使用高版本的浏览器
+		</canvas>
+	</body>
+	<script type="text/javascript">
+		
+		// 获取canvas
+		var canvas = document.getElementById("canvas1");
+		//获取绘制环境
+		var context = canvas.getContext("2d");
+		// 开始绘制
+		context.beginPath();
+		//设置路线
+		context.moveTo(100, 100);
+		context.lineTo(100, 300);
+		context.lineTo(200, 300);
+		//设置风格
+		context.strokeStyle = "red";
+		context.stroke();
+		//关闭
+		context.closePath();
+		//填充
+		//风格
+		context.fillStyle = "yellow";
+		context.fill();
+		
+	</script>
+</html>

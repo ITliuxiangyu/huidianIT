@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#my_canvas {
+				border: 3px solid gray;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="my_canvas" width="500" height="500"></canvas>
+		<audio class="miao_audio" src="MP3/miao.mov">
+			当前浏览器不支持audio
+		</audio>
+		<!-- <audio class="shizhen_audio" src="MP3/shi.mov" >
+			当前浏览器不支持audio
+		</audio> -->
+		<audio class="naozhong_audio" src="MP3/naozhong.mp3">
+			当前浏览器不支持audio
+		</audio>
+		<input class="time_input" type="datetime-local" name="" id="" value="" />
+		<button class="set_btn">设置</button>
+		<span>当前设置时间: <span class="cur_time_text"></span></span>
+	</body>
+	<script src="shijian.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		var my_canvas = document.querySelector("#my_canvas")
+		var context = my_canvas.getContext("2d")
+		var miao_audio = document.querySelector(".miao_audio")
+		var naozhong_audio = document.querySelector(".naozhong_audio")
+		var cur_time_text = document.querySelector(".cur_time_text")
+		var set_btn = document.querySelector(".set_btn")
+		var time_input = document.querySelector(".time_input")
+		var set_time_arr = []
+		set_btn.onclick = function() {
+			set_time_arr = time_input.value.split("T")
+			set_time_arr[1] += ":00"
+			cur_time_text.innerText = set_time_arr.join(" ")
+		}
+
+		// 平移
+		// context.beginPath()
+		// context.lineWidth = 5
+		// context.strokeStyle = "blue"
+		// context.strokeRect(0 , 0 , 100 , 100)
+		// context.closePath()
+		// 
+		// context.save()
+		// 
+		// // 平移的是 画布 起始点坐标
+		// context.translate(20 , 20)
+
+		// context.beginPath()
+		// context.lineWidth = 5
+		// context.strokeStyle = "red"
+		// context.strokeRect(0 , 0 , 80 , 80)
+		// context.closePath()
+		// 
+		// context.restore()
+
+		// context.beginPath()
+		// context.lineWidth = 5
+		// context.strokeStyle = "black"
+		// context.strokeRect(10 , 10 , 40 , 40)
+		// context.closePath()
+
+
+
+		// 旋转
+		// context.beginPath()
+		// context.lineWidth = 1
+		// context.strokeStyle = "black"
+		// context.strokeRect(15 , 15 , 20 , 20)
+		// context.closePath()
+		// context.translate(25 , 25)
+		// 
+		// context.rotate(30 * Math.PI / 180)
+
+
+		// context.beginPath()
+		// context.lineWidth = 1
+		// context.strokeStyle = "red"
+		// context.strokeRect(-15 , -15 , 30 , 30)
+		// context.closePath()
+
+
+		// 缩放
+		// context.beginPath()
+		// context.lineWidth = 1
+		// context.strokeStyle = "black"
+		// context.strokeRect(0 , 0 , 100 , 100)
+		// context.closePath()
+		// 
+		// context.translate(10 , 10)
+		// 
+		// context.scale(0.5 , 0.5)
+
+		// context.beginPath()
+		// context.lineWidth = 1
+		// context.strokeStyle = "red"
+		// context.strokeRect(0 , 0 , 100 , 100)
+		// context.closePath()
+		var ctx_w = my_canvas.width
+		var ctx_h = my_canvas.height
+
+
+		context.translate(500 / 2, 500 / 2)
+
+
+
+
+
+		var naozhong_time = ""
+
+		var my_img = new Image()
+		my_img.src = "kitty.jpg"
+		my_img.onload = function() {
+			draw_bcImg(this)
+		}
+		// 画 表盘 背景图片 刻度线
+		function draw_bcImg(img) {
+			context.save()
+			context.translate(-250, -250)
+			context.arc(250, 250, ctx_w / 2, 0, Math.PI * 2, true)
+			context.fillStyle = context.createPattern(img, "repeat")
+			context.fill()
+			context.restore()
+			kedu(60, "black", 20, 3)
+			kedu(12, "white", 28, 5)
+			text_fn()
+			var curr_date = new Date()
+			draw_miao_point(curr_date)
+		}
+
+		// 画 三个针
+		function draw_miao_point(time) {
+
+			// 画 秒针
+			context.save()
+			context.beginPath()
+			context.rotate(6 * time.getSeconds() * Math.PI / 180)
+			context.moveTo(-5, 0)
+			context.lineTo(5, 0)
+			context.lineTo(0, -200)
+			context.fillStyle = "darkmagenta"
+			context.fill()
+
+			context.closePath()
+			context.restore()
+
+			// 画 分针
+			draw_minutes_point(time)
+
+			// 画 时针
+			draw_hours_point(time)
+		}
+
+		// 画 分针
+		function draw_minutes_point(time) {
+			context.save()
+			context.beginPath()
+			context.rotate(6 * time.getMinutes() * Math.PI / 180 + (time.getSeconds()) / 60 * 6 * Math.PI / 180)
+			context.moveTo(0, 0)
+			context.lineTo(0, -220)
+			context.lineCap = "round"
+			context.lineWidth = 1
+			context.strokeStyle = "blue"
+			context.stroke()
+			context.closePath()
+			context.restore()
+		}
+
+		// 画 时针
+		function draw_hours_point(time) {
+			context.save()
+			context.beginPath()
+			context.rotate(30 * time.getHours() * Math.PI / 180 + (time.getMinutes()) / 60 * 30 * Math.PI / 180)
+			context.moveTo(0, 0)
+			context.lineTo(0, -120)
+			context.lineCap = "round"
+			context.lineWidth = 6
+			context.strokeStyle = "black"
+			context.stroke()
+			context.closePath()
+			context.restore()
+		}
+
+		setInterval(function() {
+			context.clearRect(-250, -250, 500, 500)
+
+			draw_bcImg(my_img)
+
+			var curr_date = new Date()
+			var now_time_arr = curr_date.pattern("yyyy-MM-dd HH:mm:ss").split(" ")
+			var is_equal = 0
+			for (var i = 0; i < set_time_arr.length; i++) {
+				if (set_time_arr[i] == now_time_arr[i]) {
+					is_equal++
+				}
+			}
+			if (is_equal == 2) {
+				// 播放闹钟音效
+				naozhong_audio.play()
+			}
+			// 画秒针
+			draw_miao_point(curr_date)
+			// 播放音效
+			play_mp3(curr_date)
+		}, 1000)
+
+		// 音效播放
+		function play_mp3(time) {
+			if (time.getMinutes() == 0 || time.getMinutes() == 60) {
+				// 播放时针音效
+
+			} else {
+				// 播放秒针音效
+				miao_audio.play()
+			}
+
+		}
+
+
+
+		// 画 文字
+		function text_fn() {
+			var hanzi = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']
+
+			for (var i = 0; i < 12; i++) {
+				context.save()
+				context.beginPath()
+				context.rotate((i + 1) * Math.PI / 6)
+				context.textAlign = "center"
+				context.font = "20px serif";
+				context.fillText(hanzi[i], 0, -200);
+				context.closePath()
+				context.restore()
+			}
+		}
+
+		// 画 刻度
+		function kedu(num, color, length, width) {
+			for (var i = 0; i < num; i++) {
+				context.save();
+				context.rotate(i * Math.PI / (num / 2))
+				context.beginPath()
+				context.lineCap = "butt"
+				context.lineWidth = width
+				context.strokeStyle = color
+				context.moveTo(0, -(ctx_w / 2))
+				context.lineTo(0, -(ctx_w / 2) + length)
+				context.stroke()
+				context.closePath()
+				context.restore()
+			}
+		}
+
+
+
+
+
+
+
+		// context.save()
+		// context.rotate(20 * Math.PI / 180)
+		// context.beginPath()
+		// context.lineWidth = 9
+		// context.strokeStyle = "darkblue"
+		// context.moveTo(250 , 0)
+		// context.lineTo(250 , 20)
+		// context.stroke()
+		// context.closePath()
+
+		// context.restore()
+	</script>
+</html>

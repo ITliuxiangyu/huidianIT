@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#min_wrap {
+				border: 1px solid #ccc;
+				position: absolute;
+			}
+
+			#min_wrap img {
+				display: block;
+			}
+
+			.max_wrap {
+				border: 1px solid #ccc;
+				width: 400px;
+				height: 400px;
+				position: absolute;
+				left: 370px;
+				overflow: hidden;
+				display: none;
+			}
+
+			#slider {
+				width: 175px;
+				height: 175px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+				background-color: rgba(255, 255, 0, 0.3);
+			}
+
+			.max_wrap img {
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="min_wrap">
+			<img src="liuyifei_min.jpg" alt="" />
+			<div id="slider"></div>
+		</div>
+		<div class="max_wrap">
+			<img src="liuyifei_big.jpg" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var minWrap = document.querySelector("#min_wrap");
+		var maxWrap = document.querySelector(".max_wrap");
+		var slider = document.querySelector("#slider");
+		var maxImg = maxWrap.children[0];
+
+		minWrap.onmousemove = function(ev) {
+
+			slider.style.display = "block";
+			maxWrap.style.display = "block";
+
+			var ev = ev || window.event;
+
+			var x = ev.clientX - minWrap.offsetLeft - slider.offsetWidth / 2;
+			var y = ev.clientY - minWrap.offsetTop - slider.offsetHeight / 2;
+
+			var maxWidth = minWrap.clientWidth - slider.offsetWidth;
+			var maxHeight = minWrap.clientHeight - slider.offsetHeight;
+			if (x >= maxWidth) {
+				x = maxWidth;
+			} else if (x <= 0) {
+				x = 0;
+			}
+
+			if (y >= maxHeight) {
+				y = maxHeight;
+			} else if (y <= 0) {
+				y = 0;
+			}
+
+			var scaleX = x / maxWidth;
+			var scaleY = y / maxHeight;
+
+			slider.style.left = x + "px";
+			slider.style.top = y + "px";
+
+			maxWrap.scrollLeft = scaleX * (maxImg.offsetWidth - maxWrap.clientWidth);
+			maxWrap.scrollTop = scaleY * (maxImg.offsetHeight - maxWrap.clientHeight);
+
+		}
+		minWrap.onmouseleave = function() {
+
+			slider.style.display = "none";
+			maxWrap.style.display = "none";
+		}
+	</script>
+</html>

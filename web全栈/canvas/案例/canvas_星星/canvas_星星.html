@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #canvas1 {
+            box-shadow: 3px 3px 10px black;
+			background: linear-gradient(lightblue , white, darkblue , black);
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas1" width="500" height="500"></canvas>
+</body>
+<script type="text/javascript">
+    $(function() {
+        var canvas = $("#canvas1")[0];
+        var context = canvas.getContext("2d");
+		
+		// 参数 6个
+		// R: 外圆半径  r:内圆半径
+		// x,y: 星星 坐标
+		// wujiao: 星星的角数
+		// start_deg: 星星是否旋转
+		// color: 颜色
+		// is_stroke: 是描边还是填充
+		function hua_xingxing(R , r , x , y , wujiao , start_deg , color , is_stroke){
+			
+			context.beginPath();
+			var jiange_deg = 360 / wujiao
+			for (var i = 0; i < wujiao; i++) {
+			    context.lineTo(Math.cos((start_deg + i * jiange_deg) / 180 * Math.PI) * R + x, Math.sin((start_deg + i * jiange_deg) / 180 * Math.PI) * R + y);
+			    context.lineTo(Math.cos(((start_deg + jiange_deg / 2) + i * jiange_deg) / 180 * Math.PI) * r + x, Math.sin(((start_deg + jiange_deg / 2) + i * jiange_deg) / 180 * Math.PI) * r + y);
+			}
+			context.closePath();
+			if (is_stroke % 2 == 0) {
+				context.strokeStyle = color;
+				context.stroke();
+			} else {
+				context.fillStyle = color;
+				context.fill();
+			}
+			
+		}
+		
+		function my_random(min , max) {
+			return parseInt(Math.random() * (max - min + 1)) + min
+		}
+		function my_random_color(){
+			return "rgb( " + my_random(0,255) + ", " + my_random(0,255) + " , " + my_random(0,255) + ")"
+		}
+		
+		for (var i = 0; i < 100; i++) {
+			var suiji_color = my_random_color()
+			hua_xingxing(my_random(5,20) , my_random(5,10) , my_random(5,490) , my_random(5,250) , my_random(4,8) , my_random(5,20) , suiji_color , my_random(100 , 200))
+		}
+
+        
+    });
+</script>
+
+</html>

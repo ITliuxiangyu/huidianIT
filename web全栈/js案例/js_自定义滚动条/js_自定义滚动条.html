@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#wrap {
+				width: 300px;
+				height: 400px;
+				border: 1px solid #ccc;
+				position: absolute;
+				left: 100px;
+				top: 100px;
+				font-size: 50px;
+				overflow: hidden;
+			}
+
+			#middle {
+				position: absolute;
+				padding-right: 20px;
+			}
+
+			#sliderWrap {
+				position: absolute;
+				right: 0;
+				top: 0;
+				height: 100%;
+				width: 20px;
+				background-color: #999;
+			}
+
+			#slider {
+				position: absolute;
+				height: 0px;
+				width: 20px;
+				background-color: red;
+				border-radius: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="middle">
+				start发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法发第三方的说法都end
+			</div>
+			<div id="sliderWrap">
+				<div id="slider"></div>
+			</div>
+		</div>
+	</body>
+
+	<script type=" text/javascript">
+		function mouseWheel(obj, fn) {
+			var ff = window.navigator.userAgent.indexOf("Firefox");
+			// alert(ff);
+			if (ff != -1) {
+				//火狐 
+				obj.addEventListener("DOMMouseScroll", wheel, false);
+			} else {
+				obj.onmousewheel = wheel;
+			}
+
+			function wheel(ev) {
+				var ev = ev || window.event;
+				var down = true;
+				if (ev.detail) {
+					//火狐 
+					down = ev.detail < 0;
+				} else {
+					down = ev.wheelDelta > 0;
+				}
+				//Function.call(对象,down,ev),apply(对象,数组);
+				// fn(down);
+				// fn.call(obj,ev,down);
+				fn.apply(obj, [ev, down]);
+				if (ev.preventDefault) {
+					ev.preventDefault();
+				}
+				return false;
+			}
+		}
+		var wrap = document.querySelector("#wrap");
+		var middle = document.querySelector("#middle");
+		var sliderWrap = document.querySelector("#sliderWrap");
+		var slider = document.querySelector("#slider");
+		
+		for (var key in middle) {
+			console.log(key , middle[key])
+		}
+		console.log(middle.clientHeight)
+		console.log(middle.offsetHeight)
+		console.log(middle.getClientRects())
+		console.log(middle.getBoundingClientRect())
+		
+
+		var scale = wrap.clientHeight / middle.offsetHeight;
+		var contentMaxHeight = middle.offsetHeight - wrap.clientHeight;
+
+		var h = sliderWrap.offsetHeight * scale;
+		if (h < 50) {
+			h = 50;
+		} else if (h > sliderWrap.offsetHeight) {
+			sliderWrap.style.display = "none";
+		}
+		slider.style.height = h + "px";
+
+		var sliderMaxHeight = sliderWrap.clientHeight - slider.offsetHeight;
+
+		var y = 0;
+
+		function move() {
+			if (y <= 0) {
+				y = 0;
+			} else if (y >= sliderMaxHeight) {
+				y = sliderMaxHeight;
+			}
+			var moveScale = y / sliderMaxHeight;
+
+			slider.style.top = y + "px";
+			middle.style.top = -contentMaxHeight * moveScale + "px";
+		}
+
+		slider.onmousedown = function(ev) {
+
+			var ev = ev || window.event;
+			var disY = ev.clientY - slider.offsetTop;
+
+			document.onmousemove = function(ev) {
+
+				var ev = ev || window.event;
+
+				y = ev.clientY - disY;
+				move();
+			}
+			document.onmouseup = function() {
+				document.onmousemove = null;
+			}
+			return false;
+		}
+
+		mouseWheel(wrap, function(ev, down) {
+			if (down) {
+				y += 5;
+			} else {
+				y -= 5;
+			}
+
+			move();
+		});
+
+		document.onkeydown = function(ev) {
+
+			var ev = ev || window.event;
+
+			switch (ev.keyCode) {
+				case 38:
+					y -= 5;
+					break;
+				case 40:
+					y += 5;
+					break;
+			}
+			move();
+		}
+		sliderWrap.onmousedown = function(ev) {
+
+			var ev = ev || window.event;
+
+			y = ev.clientY - wrap.offsetTop - slider.offsetHeight / 2;
+
+			move();
+		}
+	</script>
+</html>

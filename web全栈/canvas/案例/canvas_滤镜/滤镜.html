@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#ca{
+				border: 1px solid black;
+			}
+			#cb{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="ca" width="300" height="300"></canvas>
+		<canvas id="cb" width="300" height="300"></canvas>
+		<br />
+		<button type="button" onclick="qu_hong_fn()">去红色</button>
+		<button type="button" onclick="black_white_fn()">黑白</button>
+		<button type="button" onclick="gray_fn()">灰度处理</button>
+		<button type="button" onclick="reverse_fn()">反转</button>
+		<button type="button" onclick="mosaic_fn()">马赛克</button>
+		<button type="button" onclick="blur_fn()">模糊</button>
+	</body>
+	
+	<script type="text/javascript">
+		
+		var canvas_a = document.querySelector("#ca")
+		var context_a = canvas_a.getContext("2d")
+		
+		var canvas_b = document.querySelector("#cb")
+		var context_b = canvas_b.getContext("2d")
+		
+		var canvas_w = canvas_a.width
+		var canvas_h = canvas_a.height
+		
+		var my_img = new Image()
+		my_img.src = "liuyifei.jpg"
+		my_img.onload = function () {
+			context_a.drawImage(this , 0 , 0 , this.width , this.height , 0 , 0 , canvas_w , canvas_w)
+		}
+		
+		// 去掉红色
+		function qu_hong_fn() {
+		
+		    var imageData = context_a.getImageData(0, 0, canvas_a.width, canvas_a.height)
+		    var pixelData = imageData.data
+		    for (var i = 0; i < canvas_b.width * canvas_b.height; i++) {
+				// r 通道
+				pixelData[i * 4 + 0] = 0
+				
+		    }
+		
+		    context_b.putImageData(imageData, 0, 0, 0, 0, canvas_b.width, canvas_b.height)
+		
+		}
+		
+		// 灰度处理
+		function gray_fn() {
+		
+		    var imageData = context_a.getImageData(0, 0, canvas_a.width, canvas_a.height)
+		    var pixelData = imageData.data
+		    for (var i = 0; i < canvas_b.width * canvas_b.height; i++) {
+		
+		        var r = pixelData[i * 4 + 0]
+		        var g = pixelData[i * 4 + 1]
+		        var b = pixelData[i * 4 + 2]
+		
+		        var grey = r * 0.3 + g * 0.59 + b * 0.11
+		
+		        pixelData[i * 4 + 0] = grey
+		        pixelData[i * 4 + 1] = grey
+		        pixelData[i * 4 + 2] = grey
+		    }
+		
+		    context_b.putImageData(imageData, 0, 0, 0, 0, canvas_a.width, canvas_a.height)
+		}
+		
+		
+		// 黑白
+		function black_white_fn() {
+		
+		    var imageData = context_a.getImageData(0, 0, canvas_a.width, canvas_a.height)
+		    var pixelData = imageData.data
+		    for (var i = 0; i < canvas_b.width * canvas_b.height; i++) {
+		
+		        var r = pixelData[i * 4 + 0]
+		        var g = pixelData[i * 4 + 1]
+		        var b = pixelData[i * 4 + 2]
+		
+		        var grey = r * 0.3 + g * 0.59 + b * 0.11
+		        if (grey > 125) {
+		            pv = 255
+		        } else {
+		            pv = 0
+		        }
+		
+		        pixelData[i * 4 + 0] = pv
+		        pixelData[i * 4 + 1] = pv
+		        pixelData[i * 4 + 2] = pv
+		    }
+		
+		    context_b.putImageData(imageData, 0, 0, 0, 0, canvas_a.width, canvas_a.height)
+		}
+		
+		// 颜色反转
+		function reverse_fn() {
+		
+		    var imageData = context_a.getImageData(0, 0, canvas_a.width, canvas_a.height)
+		    var pixelData = imageData.data
+		    for (var i = 0; i < canvas_b.width * canvas_b.height; i++) {
+		
+		        var r = pixelData[i * 4 + 0]
+		        var g = pixelData[i * 4 + 1]
+		        var b = pixelData[i * 4 + 2]
+		
+		        pixelData[i * 4 + 0] = 255 - r
+		        pixelData[i * 4 + 1] = 255 - g
+		        pixelData[i * 4 + 2] = 255 - b
+		    }
+		
+		    context_b.putImageData(imageData, 0, 0, 0, 0, canvas_b.width, canvas_b.height)
+		}
+		
+		
+		// 模糊
+		function blur_fn(){
+			var img_data = context_a.getImageData(0 , 0 , canvas_w , canvas_h)
+			var px_data = img_data.data
+			
+			var img_data2 = context_a.getImageData(0 , 0 , canvas_w , canvas_h)
+			var px_data2 = img_data2.data
+			
+			var size = 20
+			
+			for (var i = 0; i < canvas_w; i++) {
+				for (var j = 0; j < canvas_h; j++) {
+					
+					var r_sum = 0
+					var g_sum = 0
+					var b_sum = 0
+					var ci = 0
+					for (var dx = 0; dx < size; dx++) {
+						for (var dy = 0; dy < size; dy++) {
+							var x = i + dx
+							var y = j + dy
+							if (x >= canvas_w || y >= canvas_h) {
+								
+							} else {
+								ci++
+								var px_index = y * canvas_w + x
+								r_sum += px_data[px_index * 4 + 0]
+								g_sum += px_data[px_index * 4 + 1]
+								b_sum += px_data[px_index * 4 + 2]
+							}
+							
+						}
+					}
+					var r_avg = r_sum / ci
+					var g_avg = g_sum / ci
+					var b_avg = b_sum / ci
+					
+					var cur_px_index = j * canvas_w + i
+					
+					px_data2[cur_px_index * 4 + 0] = r_avg
+					px_data2[cur_px_index * 4 + 1] = g_avg
+					px_data2[cur_px_index * 4 + 2] = b_avg
+				}
+			}
+			
+			context_b.putImageData(img_data2 , 0 , 0 , 0 , 0 , canvas_w , canvas_h)
+		}
+		
+		
+		// 马赛克
+		function mosaic_fn() {
+			var img_data = context_a.getImageData(0 , 0 , canvas_w , canvas_h)
+			var px_data = img_data.data
+			
+			var img_data_2 = context_a.getImageData(0 , 0 , canvas_w , canvas_h)
+			var px_data_2 = img_data_2.data
+			var size = 10
+			for (var i = 0; i < canvas_w; i+=size) {
+				for (var j = 0; j < canvas_h; j+=size) {
+					var r_sum = 0
+					var g_sum = 0
+					var b_sum = 0
+					// 获取 紧随 (i, j) 的 9个像素点
+					for (var dx = 0; dx < size; dx++) {
+						for (var dy = 0; dy < size; dy++) {
+							var x = i + dx
+							var y = j + dy
+							// (x , y) 坐标
+							var p_px = y * canvas_w + x
+							r_sum += px_data[p_px * 4 + 0]
+							g_sum += px_data[p_px * 4 + 1]
+							b_sum += px_data[p_px * 4 + 2]
+						}
+					}
+					
+					
+					var r_avg = r_sum / (size * size)
+					var g_avg = g_sum / (size * size)
+					var b_avg = b_sum / (size * size)
+					for (var dx = 0; dx < size; dx++) {
+						for (var dy = 0; dy < size; dy++) {
+							var x = i + dx
+							var y = j + dy
+							var p_px = y * canvas_w + x
+							px_data_2[p_px * 4 + 0] = r_avg
+							px_data_2[p_px * 4 + 1] = g_avg
+							px_data_2[p_px * 4 + 2] = b_avg
+						}
+					}
+				}
+			}
+			
+			context_b.putImageData(img_data_2 , 0 , 0 , 0 , 0 , canvas_w , canvas_h)
+		}
+		
+	
+	</script>
+	
+	
+</html>

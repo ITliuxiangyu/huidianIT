@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			
+		
+			#canvas1 {
+				box-shadow: 3px 3px 10px black;
+				/* background-color: black; */
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="500" height="500">
+			你的浏览器不支持canvas,请使用高版本的浏览器
+		</canvas>
+	</body>
+	<script type="text/javascript">
+		
+		// 绘制二次贝塞尔曲线
+		var canvas = document.getElementById("canvas1");
+		var context = canvas.getContext("2d");
+		context.lineWidth = "10";
+		context.strokeStyle = "red";
+		//圆角
+		// 线条 端帽
+		context.lineCap = "round";
+		context.beginPath();
+		context.moveTo(0, 0);
+		//二次贝瑟尔曲线
+		//(dx,dy) 控制点的坐标
+		//(x,y) 目标点坐标
+		// context.QueryInterface(dx,dy,x,y);
+		context.quadraticCurveTo(150, 0, 150, 150);
+		context.quadraticCurveTo(150, 300, 300, 300);
+		context.stroke();
+		
+	</script>
+</html>

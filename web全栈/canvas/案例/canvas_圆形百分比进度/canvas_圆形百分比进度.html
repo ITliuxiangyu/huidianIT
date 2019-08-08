@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+
+
+			#canvas1 {
+				box-shadow: 3px 3px 10px black;
+				/* background-color: black; */
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="500" height="500">
+			你的浏览器不支持canvas,请使用高版本的浏览器
+		</canvas>
+	</body>
+	<script type="text/javascript">
+		// 圆形百分比进度
+		ctx = canvas1.getContext("2d");
+		var timer = setInterval(draw, 30);
+
+		//初始的绘制角度
+		var deg = 90;
+		//绘制
+		function draw() {
+			//清除
+			ctx.clearRect(0, 0, canvas1.width, canvas1.height)
+
+			//绘制底层的圆
+			ctx.beginPath();
+			ctx.arc(250, 250, 200, 0, 2 * Math.PI);
+			ctx.closePath();
+			ctx.fillStyle = "orange";
+			ctx.fill();
+
+			//中间的圆
+			ctx.beginPath();
+			ctx.arc(250, 250, 150, 0, 2 * Math.PI);
+			ctx.shadowColor = 'red';
+			ctx.shadowBlur = 10;
+			ctx.fillStyle = "#f8f8f8";
+			ctx.fill();
+			//角度自增
+			deg++;
+			//绘制进度的圆弧
+			ctx.beginPath();
+			ctx.arc(250, 250, 155, -90 * Math.PI / 180, -deg * (Math.PI / 180), true);
+			ctx.lineWidth = 20;
+			//设置渐变
+			var grad = ctx.createLinearGradient(250, 0, 250, 500);
+			grad.addColorStop(0, 'rgb(115,238,253)');
+			grad.addColorStop(1, 'rgb(216,0,132)');
+			ctx.strokeStyle = grad;
+			ctx.stroke();
+
+			//绘制百分比
+			ctx.beginPath();
+			ctx.textAlign = "center";
+			ctx.fillStyle = 'purple';
+			ctx.font = '60px serif';
+			//计算百分比
+			var percent = parseInt((deg - 90) / 360 * 100) + "%";
+			ctx.fillText(percent, 250, 240);
+			if (deg == 450) {
+				clearInterval(timer);
+			}
+		}
+	</script>
+</html>

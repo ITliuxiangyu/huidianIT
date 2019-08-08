@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body >
+	
+    <canvas id="canvas" style="display:block;margin:0 auto;border:1px solid #aaa;">
+        您的浏览器尚不支持canvas
+    </canvas>
+
+    <canvas id="offCanvas" style="display: none;">
+    </canvas>
+	
+	<br />
+	<input type="range" id="scale_range" min="50" max="100" step="1" value="60" style="display:block;margin:20px auto;width:800px" />
+	
+	
+	<button onclick="duobianxing_fn()">多边形</button>
+	<button onclick="yuan_fn()">圆形</button>
+	<button onclick="juxing_fn()">矩形</button>
+	<span class="xingzhuang"></span>
+	
+	
+
+    <script>
+		var mr = 50
+		var default_scape = "多边形"
+		
+		var xingzhuang = document.querySelector(".xingzhuang")
+		xingzhuang.innerText = default_scape
+	
+		// 多边形
+		function duobianxing_fn() {
+			default_scape = "多边形"
+			xingzhuang.innerText = default_scape
+		}
+		// 圆形
+		function yuan_fn() {
+			default_scape = "圆形"
+			xingzhuang.innerText = default_scape
+		}
+		// 矩形
+		function juxing_fn() {
+			default_scape = "矩形"
+			xingzhuang.innerText = default_scape
+		}
+		
+		
+		scale_range.onchange = function () {
+			mr = this.value
+		}
+		
+        var canvas = document.getElementById("canvas")
+        var context = canvas.getContext("2d")
+
+        var offCanvas = document.getElementById("offCanvas")
+        var offContext = offCanvas.getContext("2d")
+
+        var image = new Image()
+		// 判断鼠标是否按下去
+        var isMouseDown = false
+		// 缩放 缩放比例
+        var scale;
+
+        canvas.width = 1200 * 0.5
+        canvas.height = 1200 * 0.5
+
+        image.src = "liuyifei.jpg"
+        image.onload = function() {
+
+            offCanvas.width = image.width
+            offCanvas.height = image.height
+            scale = offCanvas.width / canvas.width
+
+            context.drawImage(image, 0, 0, canvas.width, canvas.height)
+            offContext.drawImage(image, 0, 0)
+        }
+		
+		
+		// 鼠标 按下 事件
+        canvas.onmousedown = function(e) {
+			// 阻止默认事件
+            e.preventDefault()
+            isMouseDown = true
+			// bound: 边界
+			// boundary: 边界
+            var bbox = canvas.getBoundingClientRect()
+            point = {
+                x: e.clientX - bbox.left,
+                y: e.clientY - bbox.top
+            }
+			
+			// 通过 放大镜 来 绘制 canvas 画布
+            drawCanvasWithMagnifier(true, point)
+        }
+
+		// 鼠标 弹起 事件
+        canvas.onmouseup = function(e) {
+            e.preventDefault()
+            isMouseDown = false
+            drawCanvasWithMagnifier(false)
+        }
+
+		// 鼠标移动事件
+        canvas.onmousemove = function(e) {
+            e.preventDefault()
+            if (isMouseDown == true) {
+				var bbox = canvas.getBoundingClientRect()
+				
+				point = {
+				    x: e.clientX - bbox.left,
+				    y: e.clientY - bbox.top
+				}
+                drawCanvasWithMagnifier(true, point)
+            }
+        }
+
+		// 通过 放大镜 来 绘制 画布
+        function drawCanvasWithMagnifier(isShowMagnifier, point) {
+
+            context.clearRect(0, 0, canvas.width, canvas.height)
+            context.drawImage(image, 0, 0, canvas.width, canvas.height)
+            if (isShowMagnifier == true) {
+                drawMagnifier(point)
+            }
+        }
+		
+		
+		
+		
+		// 画放大镜
+        function drawMagnifier(point) {
+
+
+            var imageLG_cx = point.x * scale
+            var imageLG_cy = point.y * scale
+
+            var sx = imageLG_cx - mr
+            var sy = imageLG_cy - mr
+
+            var dx = point.x - mr
+            var dy = point.y - mr
+
+            context.save()
+
+            context.lineWidth = 10.0
+            context.strokeStyle = "red"
+
+            context.beginPath()
+			if (default_scape == "圆形") {
+				context.arc(point.x, point.y, mr, 0, Math.PI * 2, false)
+			} else if (default_scape == "多边形") {
+				hua_xingxing(mr , mr, point.x , point.y , 5 , 0 , "red" , 100)
+			} else if (default_scape == "矩形") {
+				context.rect(point.x, point.y , mr , mr)
+			}
+            
+            context.stroke()
+			context.closePath()
+            context.clip()
+            context.drawImage(offCanvas, sx, sy, 2 * mr, 2 * mr, dx, dy, 2 * mr, 2 * mr)
+            context.restore()
+        }
+		
+		// 绘制三角形
+		function hua_xingxing(R , r , x , y , wujiao , start_deg , color , is_stroke){
+			
+			var jiange_deg = 360 / wujiao
+			for (var i = 0; i < wujiao; i++) {
+			    context.lineTo(Math.cos((start_deg + i * jiange_deg) / 180 * Math.PI) * R + x, Math.sin((start_deg + i * jiange_deg) / 180 * Math.PI) * R + y);
+			    context.lineTo(Math.cos(((start_deg + jiange_deg / 2) + i * jiange_deg) / 180 * Math.PI) * r + x, Math.sin(((start_deg + jiange_deg / 2) + i * jiange_deg) / 180 * Math.PI) * r + y);
+			}
+		}
+    </script>
+</body>
+
+</html>

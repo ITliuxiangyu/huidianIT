@@ -1,0 +1,349 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>各种选择器de练习</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <style type="text/css">
+        #outer {
+            width: 400px;
+            height: 400px;
+            margin: 5px 500px;
+            border: 1px #aaa solid;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .one,
+        .two,
+        .three,
+        .four {
+            width: 170px;
+            height: 150px;
+            float: left;
+            margin: 10px 14px;
+            -webkit-background-origin: ;
+            background-origin: ;
+            rder: 1px #bbb solid;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .one div,
+        .two div,
+        .three div,
+        .four div {
+            width: 60px;
+            height: 50px;
+            margin: 5px 11px;
+            float: left;
+            border: 1px #bbb solid;
+            background: #ddd;
+        }
+        
+        .nav,
+        .nav1,
+        .nav2,
+        .nav3,
+        .nav4 {
+            width: 800px;
+            margin: 20px 350px;
+        }
+        
+        input {
+            width: 150px;
+            height: 30px;
+            margin: 2px;
+            font-size: 14px;
+        }
+        
+        span {
+            font-weight: bold;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="outer">
+        <div class="one">
+            <div>one1</div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div> <span>one</span>
+        </div>
+        <div class="two">
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div> two
+        </div>
+        <div class="three">
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div> three
+        </div>
+        <div class="four">
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div> four
+        </div>
+        <div>
+            <span>:only-child</span>
+        </div> outer </div>
+    <form class="nav">
+        <span>层次选择器:
+			</span> <input type="button" value="#outer div" id="test1" style="margin-left:35px;" />
+        <input type="button" value="#outer>div" id="test2" />
+        <input type="button" value=".one+div" id="test3" />
+        <input type="button" value=".one~div" id="test4" />
+    </form>
+    <form class="nav1">
+        <span>基本过滤选择器:
+			</span> <input type="button" value="div:first" id="test5" />
+        <input type="button" value="div:last" id="test6" />
+        <input type="button" value="div:not(.three)" id="test7" />
+        <input type="button" value="div:even" id="test8" />
+        <input type="button" value="div:odd" id="test9" style="margin-left:138px;" />
+        <input type="button" value="div:eq(2)" id="test10" />
+        <input type="button" value="div:gt(4)" id="test11" />
+        <input type="button" value="div:lt(4)" id="test12" />
+    </form>
+    <form class="nav2">
+        <span>内容过滤选择器:
+			</span> <input type="button" value="div:contains('one1')" id="test13" />
+        <input type="button" value="div:empty" id="test14" />
+        <input type="button" value="div:parent" id="test15" />
+        <input type="button" value="div:has(span)" id="test16" />
+    </form>
+    <form class="nav3">
+        <span>属性过滤选择器:
+			</span> <input type="button" value="div[class]" id="test17" />
+        <input type="button" value="div[class=two]" id="test18" />
+        <input type="button" value="div[class!=two]" id="test19" />
+        <input type="button" value="div[class^=t]" id="test20" />
+        <input type="button" value="div[class$=e]" id="test21" style="margin-left:138px;" />
+        <input type="button" value="div[class*=o]" id="test22" />
+        <input type="button" value="div[class][class*=h]" id="test23" />
+    </form>
+    <form class="nav4">
+        <span>子标签过滤选择:
+			</span> <input type="button" value="div:first-child" id="test24" />
+        <input type="button" value="div:fist" id="test25" />
+        <input type="button" value="div:last-child" id="test26" />
+        <input type="button" value="div:last" id="test27" />
+        <input type="button" value="div:nth-child(2)" id="test28" style="margin-left:138px;" />
+        <input type="button" value="div:nth-child(even)" id="test29" />
+        <input type="button" value="div:nth-child(odd)" id="test30" />
+        <input type="button" value="div span:only-child" id="test31" />
+    </form>
+    <script type="text/javascript">
+        /*层次选择器*/
+
+        //selector1 selector2
+        //选中#out包含的所有div
+        $("#test1").click(function() {
+            $("#outer div").css("background", "yellow");
+        });
+        //selector1 > selector2
+        //选中父标签是#outer的div
+        $("#test2").click(function() {
+            $("#outer>div").css("background", "yellow");
+        });
+        //selector1 + selector2 
+        //选中.one下的第一个兄弟div标签
+        $("#test3").click(function() {
+            $(".one+div").css("background", "green");
+        });
+        //selector1 ~ selector2
+        //选中.one后的所有兄弟div标签
+        $("#test4").click(function() {
+            $(".one~div").css("background", "red");
+        });
+
+
+        /*基本过滤选择器*/
+
+        //:first
+        //选中所有div中的第一个
+        $("#test5").click(function() {
+            $("div:first").css("border", "1px red solid")
+        });
+        //:last
+        //选中所有div中的最后一个
+        $("#test6").click(function() {
+            $("div:last").css("border", "1px red solid")
+        });
+        //:not(selector)
+        //选中类名不是three的所有div
+        $("#test7").click(function() {
+            $("div:not(.three)").css("border", "1px black solid")
+        });
+        //:even
+        //选中所有偶数div，索引从0开始，0为第一个偶数
+        $("#test8").click(function() {
+            $("div:even").css("border", "1px yellow solid")
+        });
+        //:odd
+        //选中所有奇数div，索引从0开始，1为第一个奇数
+        $("#test9").click(function() {
+            $("div:odd").css("border", "1px blue solid")
+        });
+        //:eq
+        //选中下标定位的div，索引从0开始
+        $("#test10").click(function() {
+            $("div:eq(2)").css("border", "1px red solid") //当前选中为第3个div
+        });
+        //:gt
+        //选中下标定位之后的所有div,不包括下标div，索引从0开始
+        $("#test11").click(function() {
+            $("div:gt(4)").css("border", "1px green solid") //当前选中为第2个div
+        });
+        //:lt
+        //选中下标定位之前的所有div,不包括下标div,索引从0开始
+        $("#test12").click(function() {
+            $("div:lt(4)").css("border", "1px yellow solid")
+        });
+
+
+        /*内容过滤选择器*/
+
+        //:contains(text)
+        //选中包含文本“four”的div，包括其父级，祖先级，外部用“”，内部用‘’
+        $("#test13").click(function() {
+            $("div:contains('one1')").css("border", "1px yellow solid")
+        });
+        //:empty
+        //选中所有不包含子元素和文本的div
+        $("#test14").click(function() {
+            $("div:empty").css("background", "red")
+        });
+        //:parent
+        //选中所有包含子元素和文本的div
+        $("#test15").click(function() {
+            $("div:parent").css("background", "green")
+        });
+        //:has(selector)
+        //选中包含span标签的div，选中的是div，而非span
+        $("#test16").click(function() {
+            $("div:has(span)").css("border", "1px red  solid")
+        });
+
+
+        /*属性过滤选择器*/
+
+        //[attr]
+        //选中拥有class属性的div
+        $("#test17").click(function() {
+            $("div[class]").css("border", "1px blue solid")
+        });
+        //[value=attr]
+        //选中class属性为two的div
+        $("#test18").click(function() {
+            $("div[class=two]").css("border", "1px green solid")
+        });
+        //[value!=attr]
+        //选中class属性不为two的所有div
+        $("#test19").click(function() {
+            $("div[class!=two]").css("border", "1px red solid")
+        });
+        //[value^=attr]
+        //选中class属性以t开头的div
+        $("#test20").click(function() {
+            $("div[class^=t]").css("background", "#c0ffff")
+        });
+        //[value$=attr]
+        //选中class属性以e结束的div
+        $("#test21").click(function() {
+            $("div[class$=e]").css("background", "yellow")
+        });
+        //[value*=attr]
+        //选中class属性中包含o的div
+        $("#test22").click(function() {
+            $("div[class*=o]").css("background", "green")
+        });
+        //[selector1] [value*=attr] 选择满足所有属性元素选择器
+        //选中拥有class属性，且class属性中包含h的div
+        $("#test23").click(function() {
+            $("div[class][class*=h]").css("background", "red")
+        });
+
+
+        /*子标签过滤选择器*/
+
+        //:first-child
+        //选中所有div中，是其父标签中的第一个子标签div
+        $("#test24").click(function() {
+            $("div:first-child").css("border", "1px red solid")
+        });
+        //:fist
+        //选中所有div中第一个标签
+        $("#test25").click(function() {
+            $("div:first").css("border", "1px red solid")
+        });
+        //:last-child
+        //选中所有div中，是其父标签的最后一个子标签div
+        $("#test26").click(function() {
+            $("div:last-child").css("border", "1px green solid")
+        });
+        //:last
+        //选中所有div中最后一个标签
+        $("#test27").click(function() {
+            $("div:last").css("border", "1px green solid")
+        });
+        //:nth-child(index/even/odd)
+        //选中所有div中是其父标签中的下标定位的标签，索引从1开始
+        $("#test28").click(function() {
+            $("div:nth-child(2)").css("background", "red")
+        });
+        //选中所有div中是其父标签中的偶数标签，索引从1开始
+        $("#test29").click(function() {
+            $("div:nth-child(even)").css("background", "yellow")
+        });
+        //选中所有div中是其父标签中的偶数标签，索引从1开始
+        $("#test30").click(function() {
+            $("div:nth-child(odd)").css("border", "1px blue solid")
+        });
+        //:only-child
+        //如果某个元素是它父元素中唯一的子元素，那么将会被匹配
+        $("#test31").click(function() {
+            $("div span:only-child").css("border", "5px solid yellow")
+        });
+
+
+        /*表单属性过滤选择器*/
+
+        //:enabled
+        //
+        $("#test32").click(function() {
+            $("").css("background", "#c0ffff")
+        });
+
+
+        //-->
+    </script>
+
+</body>
+
+</html>
