@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<style type="text/css">
+			.my_content {
+				width: 60%;
+				position: relative;
+				height: 100px;
+				overflow: scroll;
+				background-color: lightcyan;
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+				<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+				<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+				<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div style="width: 60%; border: 1px solid black;" class="tab-content">
+				<div role="tabpanel fade " class="tab-pane active" id="home">aaaaaaaaaaa a a a a aaaaaaa aaaa aaaaa f them jean
+					shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg
+					carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui
+					irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
+					apparel, butcher voluptate nisi qui.</div>
+				<div role="tabpanel fade in" class="tab-pane" id="profile">Rbbbb bbbb bbbb bbbb bbb bbb bbbf them jean shorts
+					Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles
+					vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+					terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+					butcher voluptate nisi qui.</div>
+				<div role="tabpanel fade" class="tab-pane" id="messages">cccc cc ccc ccc ccccc ccc ccc ccc ccc
+					Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles
+					vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+					terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+					butcher voluptate nisi qui.</div>
+				<div role="tabpanel fade" class="tab-pane" id="settings">dddd dddd dddd ddd dddd ddd ddd ddd ddddd
+					Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles
+					vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+					terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+					butcher voluptate nisi qui.</div>
+			</div>
+
+		</div>
+
+
+
+	</body>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*
+			show.bs.tab	
+			shown.bs.tab	
+			hide.bs.tab	
+			hidden.bs.tab
+		*/
+
+		// 监听事件
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+			console.log("888888")
+			e.target // newly activated tab
+			e.relatedTarget // previous active tab
+			console.log("_-----")
+		})
+
+		$('.nav-tabs a').click(function(e) {
+			console.log("0000")
+			e.preventDefault()
+			$(this).tab('show')
+		})
+	</script>
+</html>

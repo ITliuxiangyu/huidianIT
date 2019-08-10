@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	</head>
+	<body>
+		
+
+
+		
+
+
+		<h2>模态框</h2>
+		<button type="button" class="btn btn-primary btn-sm" data-name="第一个" data-toggle="modal" data-target="#myModal">
+			第一个
+		</button>
+		<button type="button" class="btn btn-primary btn-sm" data-name="第二个" data-toggle="modal" data-target="#myModal">
+			第二个
+		</button>
+		<button type="button" class="btn btn-primary btn-sm" data-name="第三个" data-toggle="modal" data-target="#myModal">
+			第三个
+		</button>
+		<button type="button" class="btn btn-primary btn-sm si" data-name="第四个">
+			第四个
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<input class="form-control my_content" type="text">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		// data 属性
+		// 你可以仅仅通过 data 属性 API 就能使用所有的 Bootstrap 插件，无需写一行 JavaScript 代码。
+		// 这是 Bootstrap 中的一等 API，也应该是你的首选方式。
+		// $(document).off('.data-api')
+		$(document).off('.alert.data-api')
+
+		// 监听模态框弹出事件
+		/*
+		事件类型 描述
+		show.bs.modal show 方法调用之后立即触发该事件。 如果是通过点击某个作为触发器的元素， 
+				则此元素可以通过事件的 relatedTarget 属性进行访问。
+		shown.bs.modal 此事件在模态框已经显示出来（ 并且同时在 CSS 过渡效果完成） 之后被触发。 
+				如果是通过点击某个作为触发器的元素， 则此元素可以通过事件的 relatedTarget 属性进行访问。
+		hide.bs.modal hide 方法调用之后立即触发该事件。
+		hidden.bs.modal 此事件在模态框被隐藏（ 并且同时在 CSS 过渡效果完成） 之后被触发。
+		loaded.bs.modal 从远端的数据源加载完数据之后触发该事件。
+		*/
+		$("#myModal").on("show.bs.modal", function(event) {
+			$(this).find(".my_content").val($(event.relatedTarget).data("name"))
+		})
+
+		$(".si").click(function() {
+			// 无参数
+			// $("#myModal").modal()
+
+			// $("#myModal").modal({
+			// 	"keyboard":false
+			// })
+
+			// $("#myModal").modal("toggle")
+
+			$('#myModal').modal('show')
+		})
+	</script>
+</html>
