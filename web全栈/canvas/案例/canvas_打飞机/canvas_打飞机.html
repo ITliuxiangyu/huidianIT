@@ -146,7 +146,7 @@
         canvas.width = 320;
         canvas.height = 568;
     } else {
-        canvas.width = document.documentElement.clientWidt h;
+        canvas.width = document.documentElement.clientWidth;
         canvas.height = document.documentElement.clientHeight;
     }
 
@@ -156,7 +156,7 @@
     var cH = canvas.height;
     loading.style.width = cW + "px";
     loading.style.height = cH + "px";
-    var pic_load = ["img/loading.gif", "img/background.png", "img/herofly.png", "img/bullet1.png", "img/bullet2.png", "img/enemy1.png", "img/enemy2.png", "img/enemy3.png", "img/prop.png", "img/bomb.png"];
+    var pic_load = ["img/loading.gif", "img/background.png", "img/me1.png", "img/bullet1.png", "img/bullet2.png", "img/enemy1.png", "img/enemy2.png", "img/enemy3_down1.png", "img/prop.png", "img/bomb.png"];
     var n = 0;
     for (var i = 0; i < pic_load.length; i++) {
         var loding_pic = new Image();
@@ -192,12 +192,12 @@
     var bombimg = new Image();
     bgImg1.src = "img/background.png";
     bgImg2.src = "img/background.png";
-    heroImg.src = "img/herofly.png";
+    heroImg.src = "img/me1.png";
     bullet1Img.src = "img/bullet1.png";
     bullet2Img.src = "img/bullet2.png";
     enemy1.src = "img/enemy1.png";
     enemy2.src = "img/enemy2.png";
-    enemy3.src = "img/enemy3.png";
+    enemy3.src = "img/enemy3_down1.png";
     propimg.src = "img/prop.png";
     bombimg.src = "img/bomb.png"
         // 英雄信息
