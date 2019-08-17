@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<style type="text/css">
+			body {
+				padding: 55px 0;
+			}
+
+			.navbar {
+				box-shadow: 0px 0px 2px black;
+				background-color: lightcyan;
+			}
+
+
+			/* --- home --- */
+			.home_content .home_one {
+				padding: 5px 0;
+				/* background-color: lightgoldenrodyellow; */
+				text-align: center;
+				line-height: 110px;
+				font-size: 30px;
+			}
+
+			.my_yel_line {
+				display: inline-block;
+				width: 90px;
+				height: 3px;
+				background-image: url(xieyi_imgs/line_yellow.png);
+				vertical-align: middle;
+			}
+
+			.home_content .home_one .my_text {
+				margin: 0 10px;
+
+			}
+
+			.home_content .home_two .row {
+				border-top: 1px solid gray;
+			}
+
+			.home_content .home_two .row .you_tiao {
+				display: flex;
+			}
+
+			.home_content .home_two .row .you_tiao .tiao {
+				flex: 1;
+				background-color: greenyellow;
+			}
+
+			.home_content .home_two .row .you_tiao .wenzi {
+				flex: 14;
+			}
+
+			.home_content .home_two .left_col {
+				padding-right: 0;
+			}
+
+			.home_content .home_two .right_col {
+				padding-left: 0;
+			}
+
+
+			/* 瀑布流样式 */
+			/* .pull_img #wrap {
+				width: 800px;
+				border: 1px solid red;
+				overflow: hidden;
+				margin: 0 auto;
+			} */
+
+			/* .pull_img #wrap ul {
+				width: 200px;
+				box-sizing: border-box;
+				float: left;
+			} */
+
+
+
+			/* .pull_img #wrap ul li {
+				list-style: none;
+				background-color: #ccc;
+				font-size: 20px;
+				margin: 0 5px;
+				margin-bottom: 18px;
+			} */
+
+
+			.pull_img #wrap {
+				overflow: hidden;
+				box-shadow: 0px 0px 15px red;
+				text-align: center;
+			}
+
+			.pull_img #wrap>div {
+				vertical-align: top;
+				display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+
+			<!--头部导航-->
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container" style="width: 70%;">
+					<!--小屏幕导航按钮和logo-->
+					<div class="navbar-header">
+						<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="index.html" class="navbar-brand"></a>
+					</div>
+					<!--小屏幕导航按钮和logo-->
+					<!--导航-->
+					<div class="navbar-collapse collapse">
+
+
+						<div class="da" style="overflow: hidden;">
+							<ul class="my_nav nav nav-tabs navbar-nav" role="tablist">
+								<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+								<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+								<li class="my_message_btn" role="presentation"><a href="#messages" aria-controls="messages" role="tab"
+									 data-toggle="tab">Messages</a></li>
+								<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+							</ul>
+						</div>
+
+					</div>
+					<!--导航-->
+
+				</div>
+			</nav>
+			<!--头部导航-->
+
+
+
+			<!-- 内容 -->
+			<div class="tab-content">
+				<div role="tabpanel fade " class="tab-pane active" id="home">
+					<div style="width: 70%;" class="home_content container">
+						<div class="home_one">
+							<span class="my_yel_line"></span><span class="my_text">OUR SERVICE</span><span class="my_yel_line"></span>
+						</div>
+						<div class="home_two">
+							<div class="row">
+								<div class="left_col col-md-8">
+									<img src="xieyi_imgs/en_a2.jpg" class="img-responsive" alt="">
+								</div>
+
+								<div class="right_col col-md-4">
+									<div class="you_tiao">
+										<div class="tiao"></div>
+										<div class="wenzi">
+											<h2>Digital Effect Drawing</h2>
+											<p>
+												Nosape eaqui non nobitati te ommos deria nos quatur? Pario comnit reris aut modic tecuptat omni ad
+												explanditam verupis nia sequist la et liquo omnia
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="left_col col-md-4" style="max-height: 162px; overflow: hidden;">
+									<div class="you_tiao">
+
+										<div class="wenzi">
+											<h2>Digital Effect Drawing</h2>
+											<p>
+												Nosape eaqui non nobitati te ommos deria nos quatur? Pario comnit reris aut modic tecuptat omni ad
+												explanditam verupis nia sequist la et liquo omnia
+											</p>
+										</div>
+										<div class="tiao"></div>
+									</div>
+								</div>
+
+								<div class="right_col col-md-8">
+									<img src="xieyi_imgs/en_b2.jpg" class="img-responsive" alt="">
+								</div>
+
+
+							</div>
+						</div>
+						<div class="home_three"></div>
+					</div>
+				</div>
+				<div role="tabpanel fade in" class="tab-pane" id="profile">
+					界面222
+					<br />
+					界面222
+					<br />
+					界面222<br />
+					界面222
+				</div>
+				<div role="tabpanel fade" class="tab-pane" id="messages">
+					<div class="container" style="">
+						<div class="lunbo_wrap">
+							<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+									<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+									<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+								</ol>
+
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner" role="listbox">
+									<div class="item active">
+										<img src="images/banner02.jpg" class="img-responsive" alt="...">
+										<div class="carousel-caption">
+											<h3>第一部分</h3>
+											<p>我是第一张, </p>
+										</div>
+									</div>
+									<div class="item">
+										<img src="images/banner02.jpg" alt="...">
+										<div class="carousel-caption">
+											<h3>第二部分</h3>
+											<p>我是第二张 , </p>
+										</div>
+									</div>
+									<div class="item">
+										<img src="images/banner02.jpg" alt="...">
+										<div class="carousel-caption">
+											<h3>第三部分</h3>
+											<p>我是第三张 , </p>
+										</div>
+									</div>
+								</div>
+
+								<!-- Controls -->
+								<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							</div>
+
+						</div>
+
+
+						<div class="pull_img">
+
+
+							<div id="wrap" style="width: 1000px;">
+								<!-- <ul></ul>
+								<ul></ul>
+								<ul></ul>
+								<ul></ul> -->
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel fade" class="tab-pane" id="settings">
+					界面4444
+				</div>
+			</div>
+			<!-- 内容 -->
+
+
+			<!--底部导航-->
+			<nav class="navbar navbar-default navbar-fixed-bottom">
+				<div class="container">
+
+					Copyright © 1998-2015 shining Group
+				</div>
+			</nav>
+
+
+			<!--底部导航-->
+		</div>
+
+
+	</body>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		// document 文档 
+		// CSS + html + 资源
+		window.onload = function() {
+
+		}
+		$(function() {
+			var left_8_col_h = $(".home_two .row .col-md-8").height()
+			$(".home_two .row .col-md-4").height(left_8_col_h)
+			$(".home_two .row .you_tiao").css("height", "100%")
+
+			$(".da").width($(".my_nav").width() + 5)
+			$(".da").css("margin", '0 auto')
+
+		})
+
+
+
+
+		// 监听事件
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+			console.log("888888")
+			e.target // newly activated tab
+			e.relatedTarget // previous active tab
+			console.log("_-----")
+		})
+
+		$('.nav-tabs a').click(function(e) {
+			console.log("0000")
+			e.preventDefault()
+			$(this).tab('show')
+		})
+
+
+		// 轮播图初始化
+		// 初始化
+		$('.carousel').carousel({
+			interval: 1000,
+			pause: "hover"
+		})
+
+
+
+		// 瀑布流js
+		// 列的数组
+		var all_col = document.querySelectorAll(".pull_img>#wrap>div");
+
+		var wrap = document.querySelector(".pull_img>#wrap");
+
+		// 创建 列
+		function create_col() {
+			if (all_col.length > 0) {
+				return
+			}
+			console.log("开始创建轮播图/].......")
+			wrap.innerHTML = ""; // 清空
+			for (var i = 0; i < 4; i++) {
+				var create_col = document.createElement("div");
+				create_col.style.width = "250px";
+				wrap.appendChild(create_col);
+
+			}
+			all_col = document.querySelectorAll(".pull_img>#wrap>div");
+			create_img();
+		}
+
+		var pic_num = 0
+		// var img_arr = [
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574097&di=8be97140dd9c540b10d5166ffb3b4b22&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201312%2F03%2F165620x7cknad7vruvec1z.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574097&di=5a19096fa1cb9b85c4700cdabb16d6e7&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F8b6e86871a6afbee031a30f0fdb4bc5fbfde0ce22bd42-MvP93v_fw658",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574097&di=75ec380809fe88284c2a47217a78a30c&imgtype=0&src=http%3A%2F%2Fpic166.nipic.com%2Ffile%2F20180527%2F11949215_140246196000_2.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574097&di=28d3fab13306cc36881625acc49d44b8&imgtype=0&src=http%3A%2F%2Fpic161.nipic.com%2Ffile%2F20180411%2F9448607_145554945000_2.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574096&di=5f9cc0da00045bdfbceafdcb900a5cbd&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2%2F58006dda3bf0f.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574096&di=fbc02de3e712158c625cad4b6f6acf15&imgtype=0&src=http%3A%2F%2Fpic108.nipic.com%2Ffile%2F20160828%2F21343078_165728899714_2.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574096&di=be952a91fe454269c7d9b6423a48f058&imgtype=0&src=http%3A%2F%2Fattachments.gfan.net.cn%2Fforum%2F201501%2F13%2F143316yttiiyiuvufcoyjh.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574096&di=4f303297cd232c6160defe6288bdeb3a&imgtype=0&src=http%3A%2F%2Fpic53.nipic.com%2Ffile%2F20141105%2F18505720_101842720000_2.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574095&di=29018fed4fdaf3780cda7a0f44b835de&imgtype=0&src=http%3A%2F%2Fimg1.cache.netease.com%2Fcatchpic%2F1%2F19%2F19906B6772099C376B7AED148727964E.jpg",
+		// 		"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574095&di=bbfdd323ed1b7576dfb6592d8ef73a87&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F057c50ab3dc879fe71f73661d8b7bff8b8034b1f28907-LWqMS5_fw658"
+		// ]
+
+		var img_arr = [
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574095&di=84bc921742d5e6abdaaccaeec79659b3&imgtype=0&src=http%3A%2F%2Fpic163.nipic.com%2Ffile%2F20180426%2F6083536_223757111031_2.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574095&di=ebae89cd29c11a3d5bb0773932e749af&imgtype=0&src=http%3A%2F%2Fpic31.nipic.com%2F20130724%2F3822951_160056763000_2.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574094&di=0f912c095acbe42766324da6b0b9b391&imgtype=0&src=http%3A%2F%2Fpic26.nipic.com%2F20130111%2F10210900_130928713127_2.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574094&di=34782881243185aadecb79ddedb8629f&imgtype=0&src=http%3A%2F%2Fpic31.nipic.com%2F20130801%2F1236159_100342038000_2.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574094&di=23e7a1a8369adda4054161b38c9b5cbd&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160830%2Ffe779ac6f79d4fb2a8101fda35eb8bdd_th.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574094&di=071d7ea9de45b58567b774fd377cc789&imgtype=0&src=http%3A%2F%2Fpic30.nipic.com%2F20130617%2F3822951_161141217000_2.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574093&di=d29c508e45266eed4d651a2c145a712e&imgtype=0&src=http%3A%2F%2Fimg.sccnn.com%2Fbimg%2F337%2F28719.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574093&di=0722d2efed204310f0b706ef5d10acbb&imgtype=0&src=http%3A%2F%2Fpic22.nipic.com%2F20120625%2F10406243_171052315138_2.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574092&di=c5a17808e31d76faeef09e54fce6a32d&imgtype=0&src=http%3A%2F%2Fwww.leawo.cn%2Fattachment%2F201409%2F1%2F1723875_1409556793I3Eg.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574091&di=906c4cbf78dd6ec39092ba21e0c4a8ac&imgtype=0&src=http%3A%2F%2Fpic25.nipic.com%2F20121101%2F6443349_134030781000_2.jpg",
+			"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565671574090&di=e880f85378c485461d629b7b95bf4842&imgtype=0&src=http%3A%2F%2Fpic23.nipic.com%2F20120813%2F7981740_154448602000_2.jpg"
+		]
+
+		// for (var i = 0; i < img_arr.length; i++) {
+		// 	var tmp_img = new Image()
+		// 	tmp_img.src = img_arr[i]
+		// 	tmp_img.onload = function () {
+		// 		pic_num++
+		// 	}
+		// }
+
+		
+		
+
+		
+
+
+						$(".my_message_btn").on("click", function() {
+							if (pic_num < img_arr.length) {
+								console.log("图片没有全部加载成功....")
+							} else {
+								console.log("图片全部加载成功....")
+							}
+							create_col()
+						})
+
+						// 创建 图片
+						function create_img() {
+							for (i = 0; i < img_arr.length; i++) {
+								var imgs = document.createElement("img");
+								imgs.style.width = "180px";
+								imgs.src = img_arr[i]
+								var min_index = minindex();
+								var min_col = all_col[min_index];
+								min_col.appendChild(imgs);
+							}
+						}
+						// 拿到最小高度的列
+						function minindex() {
+							var minHeight = all_col[0].clientHeight;
+							var index = 0;
+							for (var j = 0; j < all_col.length; j++) {
+
+								console.log(all_col[j].clientHeight)
+
+								if (minHeight > all_col[j].clientHeight) {
+									minHeight = all_col[j].clientHeight;
+									index = j;
+								}
+							}
+
+
+							return index;
+						}
+	</script>
+</html>
